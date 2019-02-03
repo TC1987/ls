@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/03 08:16:17 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/03 08:42:08 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,45 +96,54 @@ t_node *create_node(struct stat buffer, char *name)
     return (node);
 }
 
-void add_node(t_node **tree, struct stat buffer, char *name)
+int add_node(t_node **current, t_node *node)
 {
-	t_node *node;
-
-	node = create_node(buffer, name);
-	// No root node.
-	if (*tree == NULL)
-		*tree = node;
+	if (*current == NULL)
+		*current = node;
 	else
 	{
-		
+		if (ft_strcmp((*current)->name, node->name) > 0)
+		{
+			if ((*current)->left == NULL)
+			{
+				(*current)->left = node;
+				return 1;
+			}
+			else
+				add_node(&(*current)->left, node);
+		}
+		else
+		{
+			if ((*current)->right == NULL)
+			{
+				(*current)->right = node;
+				return 1;
+			}
+			else
+				add_node(&(*current)->right, node);
+		}
 	}
+	return (0);
 }
 
-void parse_args(char ***argv, unsigned char flags, t_trees *trees)
+int parse_args(char ***argv, unsigned char flags, t_trees *trees)
 {
 	struct stat buffer;
 	int lstat_result;
-	t_node *node;
 
 	if (**argv == NULL)
-		add_node(&(trees->directory), buffer, ".");
-	else
+		return add_node(&(trees->directory), create_node(buffer, "."));
+	while (*(++(*argv)))
 	{
-		while (**argv)
-		{
-			lstat_result = lstat(**argv, &buffer);
-			if (lstat_result < 0)
-				add_node(&(trees->invalid), buffer, **argv);
-			else if (S_ISDIR(buffer.st_mode) == 0)
-			{
-				add_node(&(trees->valid), buffer, **argv);
-				printf("valid root: %s\n", trees->valid->name);
-			}
-			else
-				add_node(&(trees->directory), buffer, **argv);
-			(*argv)++;
-		}
+		lstat_result = lstat(**argv, &buffer);
+		if (lstat_result < 0)
+			add_node(&(trees->invalid), create_node(buffer, **argv));
+		else if (S_ISDIR(buffer.st_mode) == 0)
+			add_node(&(trees->valid), create_node(buffer, **argv));
+		else
+			add_node(&(trees->directory), create_node(buffer, **argv));
 	}
+	return (1);
 }
 
 void initialize(t_trees *trees)
@@ -142,6 +151,24 @@ void initialize(t_trees *trees)
 	trees->invalid = NULL;
 	trees->valid = NULL;
 	trees->directory = NULL;
+}
+
+void display_valid(t_node *current)
+{
+	if (!current)
+		return ;
+	display_valid(current->left);
+	printf("%s\n", current->name);
+	display_valid(current->right);
+}
+
+void display_valid_reverse(t_node *current)
+{
+	if (!current)
+		return ;
+	display_valid_reverse(current->right);
+	printf("%s\n", current->name);
+	display_valid_reverse(current->left);
 }
 
 int main(int argc, char *argv[])
@@ -156,6 +183,9 @@ int main(int argc, char *argv[])
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	printf("%d\n", flags);
 	parse_args(&argv, flags, trees);
+	display_valid(trees->valid);
+	printf("--------------------------\n");
+	display_valid_reverse(trees->valid);
 	// display(head, flags);
 	// free(&head);
 }
