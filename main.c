@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 01:35:41 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/06 02:23:12 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,8 @@ t_node *add_file_node(t_node **current, t_node *node)
 // Adding to the directory tree.
 void add_directory_node(t_node **root, t_node *node, unsigned char flags)
 {
+	static int create_sub = 0;
+
 	if (*root == NULL)
 		*root = node;
 	else if (ft_strcmp((*root)->name, node->name) > 0)
@@ -131,8 +133,11 @@ void add_directory_node(t_node **root, t_node *node, unsigned char flags)
 		else
 			add_directory_node(&(*root)->right, node, flags);
 	}
-	// Instead of calling parse_dir here, call in add_directory_node's parent function?
-	parse_dir(node, flags);
+	if (create_sub == 0)
+	{
+		create_sub = 1;
+		parse_dir(node, flags);
+	}
 }
 
 void add_node(t_trees *trees, char *name, unsigned char flags)
@@ -178,8 +183,7 @@ void parse_dir(t_node *node, unsigned char flags)
 	{
 		if (!(flags & a) && file->d_name[0] == '.')
 			continue;
-		printf("%s\n", file->d_name);
-		// add_node(node->subtree, file->d_name, flags);
+		add_node(node->subtree, file->d_name, flags);
 	}
 
 	closedir(dir);
@@ -214,10 +218,13 @@ int main(int argc, char *argv[])
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
 	
-	
-	display(trees->directory);
-	printf("--------------------------\n");
-	display_reverse(trees->directory);
+	printf("----- VALID -----\n");	
+	display(trees->directory->subtree->valid);
+	printf("----- DIRECTORY -----\n");
+	display(trees->directory->subtree->directory);
+	// printf("--------------------------\n");
+	// display_reverse(trees->directory->subtree->valid);
+	// display_reverse(trees->directory->subtree->directory);
 	
 	// parse_dir(flags);
 
