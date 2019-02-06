@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 03:44:09 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/06 03:51:29 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,28 +95,7 @@ t_trees *init_tree()
 	return (tree);
 }
 
-// Adding to either the invalid or valid tree.
-t_node *add_file_node(t_node **current, t_node *node)
-{
-	if (*current == NULL)
-		return *current = node;
-	if (ft_strcmp((*current)->name, node->name) > 0)
-	{
-		if ((*current)->left == NULL)
-			return (*current)->left = node;
-		add_file_node(&(*current)->left, node);
-	}
-	else
-	{
-		if ((*current)->right == NULL)
-			return (*current)->right = node;
-		add_file_node(&(*current)->right, node);
-	}
-	return (node);
-}
-
-// Adding to the directory tree.
-void add_directory_node(t_node **root, t_node *node, unsigned char flags)
+void add_node(t_node **root, t_node *node)
 {
 	if (*root == NULL)
 		*root = node;
@@ -125,32 +104,36 @@ void add_directory_node(t_node **root, t_node *node, unsigned char flags)
 		if ((*root)->left == NULL)
 			(*root)->left = node;
 		else
-			add_directory_node(&(*root)->left, node, flags);
+			add_node(&(*root)->left, node);
 	}
 	else
 	{
 		if ((*root)->right == NULL)
 			(*root)->right = node;
 		else
-			add_directory_node(&(*root)->right, node, flags);
+			add_node(&(*root)->right, node);
 	}
-	parse_dir(node, flags);
 }
 
 // Directories need to have all contents (files and subdirectories) in one tree.
-void add_node(t_trees *trees, char *name, unsigned char flags)
+void parent_add_node(t_trees *trees, char *name, unsigned char flags)
 {
 	struct stat buffer;
 	int lstat_result;
+	t_node *node;
 
 	lstat_result = lstat(name, &buffer);
+	node = init_node(buffer, name);
 
 	if (lstat_result < 0)
-		add_file_node(&(trees->invalid), init_node(buffer, name));
+		add_node(&(trees->invalid), node);
 	else if (S_ISDIR(buffer.st_mode) == 0)
-		add_file_node(&(trees->valid), init_node(buffer, name));
+		add_node(&(trees->valid), node);
 	else
-		add_directory_node(&(trees->directory), init_node(buffer, name), flags);
+	{
+		add_node(&(trees->directory), node);
+		parse_dir(node, flags);
+	}
 }
 
 void parse_args(char ***argv, unsigned char flags, t_trees *trees)
@@ -160,12 +143,12 @@ void parse_args(char ***argv, unsigned char flags, t_trees *trees)
 
 	if (**argv == NULL)
 	{
-		add_node(trees, ".", flags);
+		parent_add_node(trees, ".", flags);
 		return ;
 	}
 	while (**argv)
 	{
-		add_node(trees, **argv, flags); 
+		parent_add_node(trees, **argv, flags); 
 		(*argv)++;
 	}
 }
@@ -182,7 +165,7 @@ void parse_dir(t_node *node, unsigned char flags)
 		if (!(flags & a) && file->d_name[0] == '.')
 			continue;
 		lstat(node->name, &buffer);
-		add_file_node(&(node->subtree), init_node(buffer, file->d_name));
+		add_node(&(node->subtree), init_node(buffer, file->d_name));
 	}
 
 	closedir(dir);
