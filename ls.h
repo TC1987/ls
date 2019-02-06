@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 01:33:31 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/06 03:07:45 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct	s_node {
 	char	*name;
 	t_node	*left;
 	t_node	*right;
-	t_trees	*subtree;
+	t_node	*subtree;
 };
 
 struct	s_trees {

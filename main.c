@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 02:23:12 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/06 03:25:15 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,8 +115,6 @@ t_node *add_file_node(t_node **current, t_node *node)
 // Adding to the directory tree.
 void add_directory_node(t_node **root, t_node *node, unsigned char flags)
 {
-	static int create_sub = 0;
-
 	if (*root == NULL)
 		*root = node;
 	else if (ft_strcmp((*root)->name, node->name) > 0)
@@ -133,13 +131,10 @@ void add_directory_node(t_node **root, t_node *node, unsigned char flags)
 		else
 			add_directory_node(&(*root)->right, node, flags);
 	}
-	if (create_sub == 0)
-	{
-		create_sub = 1;
-		parse_dir(node, flags);
-	}
+	parse_dir(node, flags);
 }
 
+// Directories need to have all contents (files and subdirectories) in one tree.
 void add_node(t_trees *trees, char *name, unsigned char flags)
 {
 	struct stat buffer;
@@ -176,35 +171,45 @@ void parse_dir(t_node *node, unsigned char flags)
 {
 	DIR				*dir;
 	struct dirent	*file;
+	struct stat buffer;
 
-	dir = opendir(".");
-	node->subtree = init_tree();
+	dir = opendir(node->name);
 	while ((file = readdir(dir)))
 	{
 		if (!(flags & a) && file->d_name[0] == '.')
 			continue;
-		add_node(node->subtree, file->d_name, flags);
+		lstat(node->name, &buffer);
+		add_file_node(&(node->subtree), init_node(buffer, file->d_name));
 	}
 
 	closedir(dir);
 }
 
-void display(t_node *current)
+void display_files(t_node *current)
 {
 	if (!current)
 		return ;
-	display(current->left);
+	display_files(current->left);
 	printf("%s\n", current->name);
-	display(current->right);
+	display_files(current->right);
 }
 
-void display_reverse(t_node *current)
+void display_files_reverse(t_node *current)
 {
 	if (!current)
 		return ;
-	display_reverse(current->right);
+	display_files_reverse(current->right);
 	printf("%s\n", current->name);
-	display_reverse(current->left);
+	display_files_reverse(current->left);
+}
+
+void display_directories(t_node *current)
+{
+	if (!current)
+		return ;
+	display_directories(current->left);
+	display_files(current->subtree);
+	display_directories(current->right);
 }
 
 int main(int argc, char *argv[])
@@ -218,10 +223,12 @@ int main(int argc, char *argv[])
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
 	
+	printf("----- INVALID -----\n");
+	display_files(trees->invalid);
 	printf("----- VALID -----\n");	
-	display(trees->directory->subtree->valid);
+	display_files(trees->valid);
 	printf("----- DIRECTORY -----\n");
-	display(trees->directory->subtree->directory);
+	display_directories(trees->directory);
 	// printf("--------------------------\n");
 	// display_reverse(trees->directory->subtree->valid);
 	// display_reverse(trees->directory->subtree->directory);
