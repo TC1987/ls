@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/03 08:42:08 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/06 00:51:37 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <string.h>
 #include <sys/stat.h>
 #include <libft.h>
+#include <dirent.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 typedef struct s_node t_node;
 typedef struct s_trees t_trees;
@@ -23,7 +26,7 @@ struct	s_node {
 	char	*name;
 	t_node	*left;
 	t_node	*right;
-	t_node	*subtree;	
+	t_trees	*subtree;	
 };
 
 struct	s_trees {
@@ -64,7 +67,8 @@ int check_flags(char ***argv, unsigned char *flags)
 	return (1);
 }
 
-t_node *create_node(struct stat buffer, char *name)
+// Need to ft_strdup here or should I do it in the function that calls this function and then pass the name?
+t_node *init_node(struct stat buffer, char *name)
 {
 	buffer = buffer;
 
@@ -96,57 +100,108 @@ t_node *create_node(struct stat buffer, char *name)
     return (node);
 }
 
-int add_node(t_node **current, t_node *node)
+// Adding to either the invalid or valid tree.
+t_node *add_file_node(t_node **current, t_node *node)
 {
 	if (*current == NULL)
-		*current = node;
+		return *current = node;
+	if (ft_strcmp((*current)->name, node->name) > 0)
+	{
+		if ((*current)->left == NULL)
+			return (*current)->left = node;
+		add_file_node(&(*current)->left, node);
+	}
 	else
 	{
-		if (ft_strcmp((*current)->name, node->name) > 0)
-		{
-			if ((*current)->left == NULL)
-			{
-				(*current)->left = node;
-				return 1;
-			}
-			else
-				add_node(&(*current)->left, node);
-		}
-		else
-		{
-			if ((*current)->right == NULL)
-			{
-				(*current)->right = node;
-				return 1;
-			}
-			else
-				add_node(&(*current)->right, node);
-		}
+		if ((*current)->right == NULL)
+			return (*current)->right = node;
+		add_file_node(&(*current)->right, node);
 	}
-	return (0);
+	return (node);
 }
 
-int parse_args(char ***argv, unsigned char flags, t_trees *trees)
+
+
+void parse_dir(unsigned char flags)
+{
+	DIR				*dir;
+	struct dirent	*file;
+
+	dir = opendir(".");
+
+	while ((file = readdir(dir)))
+	{
+		if (!(flags & a) && file->d_name[0] == '.')
+			continue;
+		printf("%s\n", file->d_name);
+	}
+
+	closedir(dir);
+}
+
+
+
+
+// Adding to the directory tree.
+void add_directory_node(t_node **current, t_node *node, unsigned char flags)
+{
+	if (*current == NULL)
+	{
+		*current = node;
+		return ;
+	}
+	if (ft_strcmp((*current)->name, node->name) > 0)
+	{
+		if ((*current)->left == NULL)
+			(*current)->left = node;
+		else
+			add_directory_node(&(*current)->left, node, flags);
+	}
+	else
+	{
+		if ((*current)->right == NULL)
+			(*current)->right = node;
+		else
+			add_directory_node(&(*current)->right, node, flags);
+	}
+	parse_dir(flags);
+}
+
+void add_node(t_trees *trees, char *name, unsigned char flags)
+{
+	struct stat buffer;
+	int lstat_result;
+
+	lstat_result = lstat(name, &buffer);
+	
+	printf("name: %s    lstat_result: %d    S_ISDIR(buffer.st_mode): %d\n", name, lstat_result, S_ISDIR(buffer.st_mode));
+
+	if (lstat_result < 0)
+		add_file_node(&(trees->invalid), init_node(buffer, name));
+	else if (S_ISDIR(buffer.st_mode) == 0)
+		add_file_node(&(trees->valid), init_node(buffer, name));
+	else
+		add_directory_node(&(trees->directory), init_node(buffer, name), flags);
+}
+
+void parse_args(char ***argv, unsigned char flags, t_trees *trees)
 {
 	struct stat buffer;
 	int lstat_result;
 
 	if (**argv == NULL)
-		return add_node(&(trees->directory), create_node(buffer, "."));
-	while (*(++(*argv)))
 	{
-		lstat_result = lstat(**argv, &buffer);
-		if (lstat_result < 0)
-			add_node(&(trees->invalid), create_node(buffer, **argv));
-		else if (S_ISDIR(buffer.st_mode) == 0)
-			add_node(&(trees->valid), create_node(buffer, **argv));
-		else
-			add_node(&(trees->directory), create_node(buffer, **argv));
+		add_node(trees, ".", flags);
+		return ;
 	}
-	return (1);
+	while (**argv)
+	{
+		add_node(trees, **argv, flags); 
+		(*argv)++;
+	}
 }
 
-void initialize(t_trees *trees)
+void init_tree(t_trees *trees)
 {
 	trees->invalid = NULL;
 	trees->valid = NULL;
@@ -178,14 +233,17 @@ int main(int argc, char *argv[])
 
 	flags = 0;
 	trees = malloc(sizeof(t_trees));
-	initialize(trees);
+	init_tree(trees);
 	if (!check_flags(&argv, &flags))
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
-	printf("%d\n", flags);
 	parse_args(&argv, flags, trees);
+	
+	
 	display_valid(trees->valid);
 	printf("--------------------------\n");
 	display_valid_reverse(trees->valid);
-	// display(head, flags);
+	
+	// parse_dir(flags);
+
 	// free(&head);
 }
