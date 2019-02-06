@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 03:25:15 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/06 03:44:09 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "ls.h"
+
+// Using add_file_node for a directory's contents, even if it's a directory.
+// add_file_node and add_directory_node are essentially the same thing.
 
 int error(char *message, int code)
 {
@@ -222,7 +225,12 @@ int main(int argc, char *argv[])
 	if (!check_flags(&argv, &flags))
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
-	
+	if (flags & R)
+	{
+		// Need to go through trees->directory and go through the node->subtree for each node.
+		// 
+	}
+			
 	printf("----- INVALID -----\n");
 	display_files(trees->invalid);
 	printf("----- VALID -----\n");	
