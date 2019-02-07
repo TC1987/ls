@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 03:51:29 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 04:58:06 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,181 +21,13 @@
 #include "ls.h"
 
 // Using add_file_node for a directory's contents, even if it's a directory.
-// add_file_node and add_directory_node are essentially the same thing.
+// For printing, use function pointers.
+// 2. Need to append full path for recursive calls.
 
 int error(char *message, int code)
 {
 	printf("%s\n", message);
 	return (code);
-}
-
-int update_flag(char f, unsigned char *flags)
-{
-	if (f == 'l')
-		return *flags |= 1 << l;
-	if (f == 'a')
-		return *flags |= 1 << a;
-	if (f == 'r')
-		return *flags |= 1 << r;
-	if (f == 't')
-		return *flags |= 1 << t;
-	if (f == 'R')
-		return *flags |= 1 << R;
-	return (0);
-}
-
-int check_flags(char ***argv, unsigned char *flags)
-{
-	while (*(++(*argv)) && ***argv == '-')
-		while (*(++(**argv)))
-			if (!update_flag(***argv, flags))
-				return (0);
-	return (1);
-}
-
-// Need to ft_strdup here or should I do it in the function that calls this function and then pass the name?
-t_node *init_node(struct stat buffer, char *name)
-{
-    t_node *node;
-
-    if (!(node = (t_node *)malloc(sizeof(t_node))))
-        return NULL;
-	/*
-   	if (index)
-    {
-        node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), buffer.st_mtime);
-		node->nanoseconds = buffer.st_mtimespec.tv_nsec;
-        node->mode = get_mode();
-        node->group = ft_strdup(getgrgid(g_buffer.st_gid)->gr_name);
-        node->user = ft_strdup(getpwuid(g_buffer.st_uid)->pw_name);
-        node->size = buffer.st_size;
-        node->links = buffer.st_nlink;
-        node->numtime = buffer.st_mtime;
-		node->linkname = NULL;
-		node->device = buffer.st_rdev;
-		node->major = major(buffer.st_rdev);
-		node->minor = minor(buffer.st_rdev);
-	}
-	*/
-    node->name = ft_strdup(name);
-	node->left = NULL;
-	node->right = NULL;
-	node->subtree = NULL;
-    return (node);
-}
-
-t_trees *init_tree()
-{
-	t_trees *tree;
-
-	MALLOC_CHECK((tree = malloc(sizeof(t_trees))));
-	tree->invalid = NULL;
-	tree->valid = NULL;
-	tree->directory = NULL;
-	return (tree);
-}
-
-void add_node(t_node **root, t_node *node)
-{
-	if (*root == NULL)
-		*root = node;
-	else if (ft_strcmp((*root)->name, node->name) > 0)
-	{
-		if ((*root)->left == NULL)
-			(*root)->left = node;
-		else
-			add_node(&(*root)->left, node);
-	}
-	else
-	{
-		if ((*root)->right == NULL)
-			(*root)->right = node;
-		else
-			add_node(&(*root)->right, node);
-	}
-}
-
-// Directories need to have all contents (files and subdirectories) in one tree.
-void parent_add_node(t_trees *trees, char *name, unsigned char flags)
-{
-	struct stat buffer;
-	int lstat_result;
-	t_node *node;
-
-	lstat_result = lstat(name, &buffer);
-	node = init_node(buffer, name);
-
-	if (lstat_result < 0)
-		add_node(&(trees->invalid), node);
-	else if (S_ISDIR(buffer.st_mode) == 0)
-		add_node(&(trees->valid), node);
-	else
-	{
-		add_node(&(trees->directory), node);
-		parse_dir(node, flags);
-	}
-}
-
-void parse_args(char ***argv, unsigned char flags, t_trees *trees)
-{
-	struct stat buffer;
-	int lstat_result;
-
-	if (**argv == NULL)
-	{
-		parent_add_node(trees, ".", flags);
-		return ;
-	}
-	while (**argv)
-	{
-		parent_add_node(trees, **argv, flags); 
-		(*argv)++;
-	}
-}
-
-void parse_dir(t_node *node, unsigned char flags)
-{
-	DIR				*dir;
-	struct dirent	*file;
-	struct stat buffer;
-
-	dir = opendir(node->name);
-	while ((file = readdir(dir)))
-	{
-		if (!(flags & a) && file->d_name[0] == '.')
-			continue;
-		lstat(node->name, &buffer);
-		add_node(&(node->subtree), init_node(buffer, file->d_name));
-	}
-
-	closedir(dir);
-}
-
-void display_files(t_node *current)
-{
-	if (!current)
-		return ;
-	display_files(current->left);
-	printf("%s\n", current->name);
-	display_files(current->right);
-}
-
-void display_files_reverse(t_node *current)
-{
-	if (!current)
-		return ;
-	display_files_reverse(current->right);
-	printf("%s\n", current->name);
-	display_files_reverse(current->left);
-}
-
-void display_directories(t_node *current)
-{
-	if (!current)
-		return ;
-	display_directories(current->left);
-	display_files(current->subtree);
-	display_directories(current->right);
 }
 
 int main(int argc, char *argv[])
@@ -208,22 +40,20 @@ int main(int argc, char *argv[])
 	if (!check_flags(&argv, &flags))
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
-	if (flags & R)
-	{
-		// Need to go through trees->directory and go through the node->subtree for each node.
-		// 
-	}
-			
+
+	if (flags & 1 << R)
+		display_recursive(trees->directory);
+
 	printf("----- INVALID -----\n");
 	display_files(trees->invalid);
 	printf("----- VALID -----\n");	
 	display_files(trees->valid);
 	printf("----- DIRECTORY -----\n");
 	display_directories(trees->directory);
-	// printf("--------------------------\n");
-	// display_reverse(trees->directory->subtree->valid);
-	// display_reverse(trees->directory->subtree->directory);
-	
+	//	printf("--------------------------\n");
+	//	display_files_reverse(trees->invalid);
+	//	display_files_reverse(trees->valid);
+
 	// parse_dir(flags);
 
 	// free(&head);

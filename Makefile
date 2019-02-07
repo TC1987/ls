@@ -1,5 +1,10 @@
 NAME = ls
-BASE = main
+BASE = main \
+	   src/add \
+	   src/display \
+	   src/flags \
+	   src/init \
+	   src/parse
 SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a
@@ -9,12 +14,13 @@ INCLUDE = -I. -I./libft/
 RED = \x1b[31m
 GREEN = \x1b[32m
 RESET = \x1b[0m
+SANITIZE = -fsanitize=address
 
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(SRC)
 	@echo "$(GREEN)"Compiling Project"$(RESET)"
-	@$(COMPILE_SOFT) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft
+	@$(COMPILE_SOFT) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(SANITIZE)
 	@echo "$(GREEN)"Project Successfully Compiled"$(RESET)"
 
 $(LIBFT):
