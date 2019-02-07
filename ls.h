@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 19:27:38 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 05:27:45 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ t_node	*add_node(t_node **root, t_node *node);
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
 void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags);
-void	display_files(t_node *current);
-void	display_files_reverse(t_node *current);
-void	display_directories(t_node *current);
-void	display_recursive(t_node *root);
+void	print_files(t_node *current);
+void	print_files_reverse(t_node *current);
+void	print_directories(t_node *current);
+void	print_recursive(t_node *root);
 
 #endif

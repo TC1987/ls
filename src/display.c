@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/06 19:28:04 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 05:48:10 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,43 @@
 #include <stdio.h>
 #include "ls.h"
 
-void display_files(t_node *current)
+void print_files(t_node *current)
 {
 	if (!current)
 		return ;
-	display_files(current->left);
+	print_files(current->left);
 	printf("%s\n", current->name);
-	display_files(current->right);
+	print_files(current->right);
 }
 
-void display_files_reverse(t_node *current)
+void print_files_reverse(t_node *current)
 {
 	if (!current)
 		return ;
-	display_files_reverse(current->right);
+	print_files_reverse(current->right);
 	printf("%s\n", current->name);
-	display_files_reverse(current->left);
+	print_files_reverse(current->left);
 }
 
-void display_directories(t_node *current)
+void print_directories(t_node *current)
 {
 	if (!current)
 		return ;
-	display_directories(current->left);
-	display_files(current->subtree);
-	display_directories(current->right);
+	print_directories(current->left);
+	print_files(current->subtree);
+	print_directories(current->right);
 }
 
-void display_recursive(t_node *root)
+void print_recursive(t_node *root)
 {
 	if (!root)
 		return ;
-	display_recursive(root->left);
-	printf("%s\n", root->name);
-	display_recursive(root->subtree);
-	display_recursive(root->right);
+	print_recursive(root->left);
+	if (root->subtree)
+	{
+		printf("\n%s:\n", root->name);
+		print_directories(root);  // Prints subtree in order.
+		print_recursive(root->subtree);
+	}
+	print_recursive(root->right);
 }

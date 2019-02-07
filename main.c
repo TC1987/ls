@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 04:58:06 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 05:29:31 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int main(int argc, char *argv[])
 	parse_args(&argv, flags, trees);
 
 	if (flags & 1 << R)
-		display_recursive(trees->directory);
+		print_recursive(trees->directory);
 
 	printf("----- INVALID -----\n");
-	display_files(trees->invalid);
+	print_files(trees->invalid);
 	printf("----- VALID -----\n");	
-	display_files(trees->valid);
+	print_files(trees->valid);
 	printf("----- DIRECTORY -----\n");
-	display_directories(trees->directory);
+	print_directories(trees->directory);
 	//	printf("--------------------------\n");
 	//	display_files_reverse(trees->invalid);
 	//	display_files_reverse(trees->valid);
