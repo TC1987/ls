@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 05:18:13 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 05:19:34 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,6 @@ void parse_args(char ***argv, unsigned char flags, t_trees *trees)
 		parent_add_node(trees, **argv, flags);
 		(*argv)++;
 	}
-}
-
-char *concat(char *str1, char *str2)
-{
-	while (*str1)
-		str1++;
-	while (*str2)
-	{
-		*str1 = *str2;
-		str1++;
-		str2++;
-	}
-	*str1 = '\0';
-	return (str1);
 }
 
 char *create_full_path(char *str1, char *str2)
