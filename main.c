@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 05:29:31 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 06:07:03 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 // Using add_file_node for a directory's contents, even if it's a directory.
 // For printing, use function pointers.
 // 2. Need to append full path for recursive calls.
+// How to determine if a node is a directory or not for printing? Currently doing node->is_dir = 1 which is ghetto. How else to determine if directory node?
+
 
 int error(char *message, int code)
 {

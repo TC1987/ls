@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 05:19:34 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 06:00:21 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ void parse_dir(t_node *node, unsigned char flags)
 		current_node->full_path = tmp;
 		add_node(&(node->subtree), current_node);
 		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode))
+		{
+			current_node->is_dir = 1;
 			parse_dir(current_node, flags);
+		}
 	}
 	closedir(dir);
 }

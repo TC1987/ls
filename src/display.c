@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 05:48:10 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/07 06:13:11 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void print_recursive(t_node *root)
 	if (!root)
 		return ;
 	print_recursive(root->left);
-	if (root->subtree)
+	if (root->is_dir)
 	{
-		printf("\n%s:\n", root->name);
+		printf("\n%s:\n", root->full_path);
 		print_directories(root);  // Prints subtree in order.
 		print_recursive(root->subtree);
 	}
