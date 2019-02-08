@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 02:43:52 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 04:13:23 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ void print_files_reverse(t_node *current)
 	print_files_reverse(current->left);
 }
 
-void print_directories(t_node *current)
+void print_directories(t_node *current, int print_name)
 {
 	if (!current)
 		return ;
-	print_directories(current->left);
-	printf("\n%s:\n", current->name);
+	print_directories(current->left, 1);
+	if (print_name)
+		printf("\n%s:\n", current->name);
 	print_files(current->subtree);
-	print_directories(current->right);
+	print_directories(current->right, 1);
 }
 
 void print_recursive(t_node *root)
