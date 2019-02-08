@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 05:57:42 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 02:26:37 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ typedef struct s_node t_node;
 typedef struct s_trees t_trees;
 
 struct	s_node {
-	char	*name;
-	char	*full_path;
-	t_node	*left;
-	t_node	*right;
-	t_node	*subtree;
-	int		is_dir;
+	char			*name;
+	char			*full_path;
+	t_node			*left;
+	t_node			*right;
+	t_node			*subtree;
+	unsigned int	type: 2;
 };
 
 struct	s_trees {
@@ -34,6 +34,7 @@ struct	s_trees {
 };
 
 enum e_flags { l, a, r, t, R };
+enum e_type { NONE, INVALID, VALID, DIRECTORY };
 
 int		error(char *message, int code);
 int		update_flag(char f, unsigned char *flags);
@@ -44,6 +45,7 @@ t_node	*add_node(t_node **root, t_node *node);
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
 void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags);
+void	print_invalid(t_node *current);
 void	print_files(t_node *current);
 void	print_files_reverse(t_node *current);
 void	print_directories(t_node *current);

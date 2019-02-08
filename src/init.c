@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 05:56:58 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 02:23:21 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ t_node *init_node(struct stat buffer, char *name)
 	node->left = NULL;
 	node->right = NULL;
 	node->subtree = NULL;
-	node->is_dir = 0;
+	node->type = NONE;
     return (node);
 }
 

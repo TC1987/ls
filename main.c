@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 06:07:03 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 02:37:07 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,14 @@ int main(int argc, char *argv[])
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
 
-	if (flags & 1 << R)
-		print_recursive(trees->directory);
-
 	printf("----- INVALID -----\n");
-	print_files(trees->invalid);
+	print_invalid(trees->invalid);
 	printf("----- VALID -----\n");	
 	print_files(trees->valid);
 	printf("----- DIRECTORY -----\n");
-	print_directories(trees->directory);
-	//	printf("--------------------------\n");
-	//	display_files_reverse(trees->invalid);
-	//	display_files_reverse(trees->valid);
-
-	// parse_dir(flags);
-
-	// free(&head);
+	if (flags & 1 << R)
+		print_recursive(trees->directory);
+	else
+		print_directories(trees->directory);
+	// free();
 }

@@ -6,13 +6,22 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/07 06:13:11 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 02:43:52 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/stat.h>
 #include <stdio.h>
 #include "ls.h"
+
+void print_invalid(t_node *current)
+{
+	if (!current)
+		return ;
+	print_invalid(current->left);
+	printf("ls: %s: No such file or directory\n", current->name);
+	print_invalid(current->right);
+}
 
 void print_files(t_node *current)
 {
@@ -37,6 +46,7 @@ void print_directories(t_node *current)
 	if (!current)
 		return ;
 	print_directories(current->left);
+	printf("\n%s:\n", current->name);
 	print_files(current->subtree);
 	print_directories(current->right);
 }
@@ -46,10 +56,11 @@ void print_recursive(t_node *root)
 	if (!root)
 		return ;
 	print_recursive(root->left);
-	if (root->is_dir)
+	if (root->type == DIRECTORY)
 	{
-		printf("\n%s:\n", root->full_path);
-		print_directories(root);  // Prints subtree in order.
+		printf("%s:\n", root->full_path ? root->full_path: root->name);
+		print_files(root->subtree);
+		printf("\n");
 		print_recursive(root->subtree);
 	}
 	print_recursive(root->right);
