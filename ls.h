@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 02:26:37 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 04:17:59 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ struct	s_trees {
 };
 
 enum e_flags { l, a, r, t, R };
-enum e_type { NONE, INVALID, VALID, DIRECTORY };
+enum e_type { NONE, DIRECTORY };
 
 int		error(char *message, int code);
 int		update_flag(char f, unsigned char *flags);
@@ -48,7 +48,7 @@ void	parse_dir(t_node *node, unsigned char flags);
 void	print_invalid(t_node *current);
 void	print_files(t_node *current);
 void	print_files_reverse(t_node *current);
-void	print_directories(t_node *current);
-void	print_recursive(t_node *root);
+void	print_directories(t_node *current, int print_name);
+void	print_recursive(t_node *root, int print_name);
 
 #endif
