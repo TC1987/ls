@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 18:15:23 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/09 01:47:57 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void print_files(t_node *current, unsigned char flags)
 		print_major_minor(current);
 		printf("%s ", current->time);
 	}
-	printf("%s\n", current->name);
+	printf("%s", current->name);
+	current->linkname ? printf(" -> %s\n", current->linkname) : printf("\n");
 	print_files(current->right, flags);
 }
 

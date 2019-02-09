@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:31:33 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 20:23:55 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/09 02:53:48 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void parent_add_node(t_trees *trees, char *name, unsigned char flags)
 	int (*sorting_function)(t_node *, t_node *);
 	
 	lstat_result = lstat(name, &buffer);
-	node = init_node(buffer, name);
+	node = init_node(buffer, name, name);
 	sorting_function = get_sorting_function(flags);
 
 	if (lstat_result < 0)

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 20:25:02 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/09 01:35:37 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ struct	s_node {
 	t_node			*left;
 	t_node			*right;
 	t_node			*subtree;
-	unsigned int	type: 2;
-
-	// For long format.
+	unsigned int	type: 1;
 	char			*time;
 	char			*mode;
 	char			*linkname;
@@ -58,7 +56,7 @@ enum e_type { NONE, DIRECTORY };
 int		error(char *message, int code);
 int		update_flag(char f, unsigned char *flags);
 int		check_flags(char ***argv, unsigned char *flags);
-t_node	*init_node(struct stat buffer, char *name);
+t_node	*init_node(struct stat buffer, char *name, char *full_path);
 t_trees	*init_tree();
 t_node	*add_node(t_node **root, t_node *node, int (*sorting_function)(t_node *, t_node *));
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
