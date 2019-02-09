@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 04:17:59 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 17:56:05 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,23 @@ struct	s_node {
 	t_node			*right;
 	t_node			*subtree;
 	unsigned int	type: 2;
+
+	// For long format.
+	char			*time;
+	char			*mode;
+	char			*linkname;
+	char			*group;
+	char			*user;
+	long long		size;
+	unsigned short	links;
+	struct s_data	*next;
+	struct s_data	*sub_list;
+	long long		total;
+	long			numtime;
+	long			nanoseconds;
+	unsigned int	device;
+	unsigned int	major;
+	unsigned int	minor;
 };
 
 struct	s_trees {
@@ -50,5 +67,11 @@ void	print_files(t_node *current);
 void	print_files_reverse(t_node *current);
 void	print_directories(t_node *current, int print_name);
 void	print_recursive(t_node *root, int print_name);
+
+// long_format.c
+char	*get_mode(struct stat buffer);
+char	*get_extra(char *mode, struct stat buffer);
+char	*get_first(char *mode, struct stat buffer);
+char	*time_clean(char *src_time, long numtime);
 
 #endif
