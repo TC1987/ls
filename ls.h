@@ -6,12 +6,14 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 18:06:59 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 20:20:05 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LS_H
 #define LS_H
+
+#include <sys/stat.h>
 
 #define NULL_CHECK(x) if ((x) == NULL) return NULL
 
@@ -58,7 +60,7 @@ int		update_flag(char f, unsigned char *flags);
 int		check_flags(char ***argv, unsigned char *flags);
 t_node	*init_node(struct stat buffer, char *name);
 t_trees	*init_tree();
-t_node	*add_node(t_node **root, t_node *node);
+t_node	*add_node(t_node **root, t_node *node, int (*sorting_function)(t_node *, t_node *));
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
 void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags);
@@ -74,5 +76,14 @@ char	*get_extra(char *mode, struct stat buffer);
 char	*get_first(char *mode, struct stat buffer);
 char	*time_clean(char *src_time, long numtime);
 void	print_major_minor(t_node *current);
+
+// compare.c
+int		ft_timecmp(t_node *n1, t_node *n2);
+int		ft_timecmp_r(t_node *n1, t_node *n2);
+int		ft_lexcmp(t_node *n1, t_node *n2);
+int		ft_lexcmp_r(t_node *n1, t_node *n2);
+
+// main.c
+int		(*get_sorting_function(unsigned char flags))(t_node *, t_node *);
 
 #endif

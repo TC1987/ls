@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 18:13:38 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 19:19:51 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,27 @@ int error(char *message, int code)
 	return (code);
 }
 
+int (*get_sorting_function(unsigned char flags))(t_node *, t_node *)
+{
+	if (flags & 1 << r)
+		return (ft_lexcmp_r);
+	else if (flags & 1 << t)
+		return (ft_timecmp);
+	else
+		return (ft_lexcmp);
+}
+
 int main(int argc, char *argv[])
 {
 	unsigned char flags;
 	t_trees *trees;
+	int (*sorting_function)(t_node *, t_node *);
 
 	flags = 0;
 	trees = init_tree();
 	if (!check_flags(&argv, &flags))
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
+	sorting_function = get_sorting_function(flags);
 	parse_args(&argv, flags, trees);
 	print_invalid(trees->invalid);
 	print_files(trees->valid, flags);

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 17:37:30 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 20:16:10 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ void parse_dir(t_node *node, unsigned char flags)
 	t_node			*current_node;
 	char			*path;
 	char			*tmp;
+	int (*sorting_function)(t_node *, t_node *);
 
 	path = node->full_path ? node->full_path : node->name;
+	sorting_function = get_sorting_function(flags);
 	if (!(dir = opendir(path)))
 		return ;
 	while ((file = readdir(dir)))
@@ -70,7 +72,7 @@ void parse_dir(t_node *node, unsigned char flags)
 		lstat(tmp, &buffer);
 		current_node = init_node(buffer, file->d_name);
 		current_node->full_path = tmp;
-		add_node(&(node->subtree), current_node);
+		add_node(&(node->subtree), current_node, sorting_function);
 		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
 		{
 			current_node->type = DIRECTORY;

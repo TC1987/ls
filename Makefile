@@ -5,7 +5,8 @@ BASE = main \
 	   src/flags \
 	   src/init \
 	   src/parse \
-	   src/long_format
+	   src/long_format \
+	   src/compare
 SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a
