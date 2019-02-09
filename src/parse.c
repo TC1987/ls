@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/09 02:54:31 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/09 03:44:00 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 			continue;
 		tmp = create_full_path(node->full_path, file->d_name);
 		lstat(tmp, &buffer);
+		node->total += buffer.st_blocks;
 		current_node = init_node(buffer, file->d_name, tmp);
 		add_node(&(node->subtree), current_node, sorting_function);
 		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))

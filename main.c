@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/09 01:40:52 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/09 03:50:42 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ int main(int argc, char *argv[])
 		print_recursive(trees->directory, 0, flags);
 	else
 		print_directories(trees->directory, 0, flags);
+	// while (1);
 	// free();
 }

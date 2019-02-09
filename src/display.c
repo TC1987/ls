@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/09 01:47:57 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/09 03:47:17 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,29 @@ void print_directories(t_node *current, int print_name, unsigned char flags)
 		printf("\n");
 	if (print_name || current->left || current->right)
 		printf("%s:\n", current->name);
+	if (flags & 1 << l && current->total)
+		printf("total %lld\n", current->total);
 	print_files(current->subtree, flags);
 	print_directories(current->right, 1, flags);
 }
 
-void print_recursive(t_node *root, int print_name, unsigned char flags)
+void print_recursive(t_node *current, int print_name, unsigned char flags)
 {
-	if (!root)
+	if (!current)
 		return ;
-	print_recursive(root->left, 1, flags);
-	if (root->type == DIRECTORY)
+	print_recursive(current->left, 1, flags);
+	if (current->type == DIRECTORY)
 	{
 		if (print_name)
 			printf("\n");
-		if (print_name || root->left || root->right)
-			printf("%s:\n", root->full_path ? root->full_path: root->name);
-		print_files(root->subtree, flags);
-		print_recursive(root->subtree, 1, flags);
+		if (print_name || current->left || current->right)
+			printf("%s:\n", current->full_path ? current->full_path: current->name);
+		if (flags & 1 << l && current->total)
+			printf("total %lld\n", current->total);
+		print_files(current->subtree, flags);
+		print_recursive(current->subtree, 1, flags);
 	}
-	print_recursive(root->right, 1, flags);
+	print_recursive(current->right, 1, flags);
 }
 
 void print_major_minor(t_node *current)
