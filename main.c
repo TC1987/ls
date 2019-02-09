@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 04:19:09 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 18:13:38 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@
 #include <unistd.h>
 #include "ls.h"
 
-// Using add_file_node for a directory's contents, even if it's a directory.
 // For printing, use function pointers.
-// 2. Need to append full path for recursive calls.
 // How to determine if a node is a directory or not for printing? Currently doing node->is_dir = 1 which is ghetto. How else to determine if directory node?
-
+// Print symbolic links.
 
 int error(char *message, int code)
 {
@@ -43,10 +41,10 @@ int main(int argc, char *argv[])
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
 	print_invalid(trees->invalid);
-	print_files(trees->valid);
+	print_files(trees->valid, flags);
 	if (flags & 1 << R)
-		print_recursive(trees->directory, 0);
+		print_recursive(trees->directory, 0, flags);
 	else
-		print_directories(trees->directory, 0);
+		print_directories(trees->directory, 0, flags);
 	// free();
 }

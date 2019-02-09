@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 17:56:05 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 18:06:59 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,15 +63,16 @@ void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
 void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags);
 void	print_invalid(t_node *current);
-void	print_files(t_node *current);
+void	print_files(t_node *current, unsigned char flags);
 void	print_files_reverse(t_node *current);
-void	print_directories(t_node *current, int print_name);
-void	print_recursive(t_node *root, int print_name);
+void	print_directories(t_node *current, int print_name, unsigned char flags);
+void	print_recursive(t_node *root, int print_name, unsigned char flags);
 
 // long_format.c
 char	*get_mode(struct stat buffer);
 char	*get_extra(char *mode, struct stat buffer);
 char	*get_first(char *mode, struct stat buffer);
 char	*time_clean(char *src_time, long numtime);
+void	print_major_minor(t_node *current);
 
 #endif
