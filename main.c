@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 19:19:51 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 20:36:27 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include "ls.h"
 
+// When using t and r, order is messed up. -tr prints the same as just -r.
 // For printing, use function pointers.
 // How to determine if a node is a directory or not for printing? Currently doing node->is_dir = 1 which is ghetto. How else to determine if directory node?
 // Print symbolic links.
@@ -32,7 +33,9 @@ int error(char *message, int code)
 
 int (*get_sorting_function(unsigned char flags))(t_node *, t_node *)
 {
-	if (flags & 1 << r)
+	if (flags & 1 << r && flags & 1 << t)
+		return (ft_timecmp_r);
+	else if (flags & 1 << r)
 		return (ft_lexcmp_r);
 	else if (flags & 1 << t)
 		return (ft_timecmp);

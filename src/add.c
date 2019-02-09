@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:31:33 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 20:18:25 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 20:23:55 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,6 @@ void parent_add_node(t_trees *trees, char *name, unsigned char flags)
 	{
 		add_node(&(trees->directory), node, sorting_function);
 		node->type = DIRECTORY;
-		parse_dir(node, flags);
+		parse_dir(node, flags, sorting_function);
 	}
 }

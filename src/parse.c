@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 20:16:10 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/08 20:24:26 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char *create_full_path(char *str1, char *str2)
 	return (full_path);
 }
 
-void parse_dir(t_node *node, unsigned char flags)
+void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node *, t_node *))
 {
 	DIR				*dir;
 	struct dirent	*file;
@@ -58,10 +58,8 @@ void parse_dir(t_node *node, unsigned char flags)
 	t_node			*current_node;
 	char			*path;
 	char			*tmp;
-	int (*sorting_function)(t_node *, t_node *);
 
 	path = node->full_path ? node->full_path : node->name;
-	sorting_function = get_sorting_function(flags);
 	if (!(dir = opendir(path)))
 		return ;
 	while ((file = readdir(dir)))
@@ -76,7 +74,7 @@ void parse_dir(t_node *node, unsigned char flags)
 		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
 		{
 			current_node->type = DIRECTORY;
-			parse_dir(current_node, flags);
+			parse_dir(current_node, flags, sorting_function);
 		}
 	}
 	closedir(dir);
