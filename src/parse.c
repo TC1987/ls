@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/09 03:44:00 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/10 19:41:31 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,5 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 		}
 	}
 	closedir(dir);
+	// By the time we get here, the current directory has been fully read and all of its contents are sorted.
 }
