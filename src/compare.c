@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 18:17:44 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/08 19:05:39 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 02:57:18 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,35 +27,6 @@ int ft_timecmp(t_node *n1, t_node *n2)
 	return (0);
 }
 
-// This is just ft_strcmp. Use that instead and have ft_lexcmp be a wrapper.
-/*
-int ft_lexcmp(t_node *n1, t_node *n2)
-{
-	char *str1;
-	char *str2;
-
-	str1 = n1->name;
-	str2 = n2->name;
-
-	return (ft_strcmp(str1, str2));
-}
-*/
-
-int ft_lexcmp(t_node *n1, t_node *n2)
-{
-	char *str1;
-	char *str2;
-
-	str1 = n1->name;
-	str2 = n2->name;
-    while (*str1 == *str2 && *str1 && *str2)
-    {
-        str1++;
-        str2++;
-    }
-    return (*(unsigned char *)str1 - *(unsigned char *)str2);
-}
-
 int ft_timecmp_r(t_node *n1, t_node *n2)
 {
 	if (n1->numtime == n2->numtime)
@@ -70,18 +41,18 @@ int ft_timecmp_r(t_node *n1, t_node *n2)
 	return (0);
 }
 
-// return ft_lexcmp * -1?
-int ft_lexcmp_r(t_node *n1, t_node *n2)
+int ft_lexcmp(t_node *n1, t_node *n2)
 {
 	char *str1;
 	char *str2;
 
 	str1 = n1->name;
 	str2 = n2->name;
-    while (*str1 == *str2 && *str1 && *str2)
-    {
-        str1++;
-        str2++;
-    }
-    return (*(unsigned char *)str2 - *(unsigned char *)str1);
+
+	return (ft_strcmp(str1, str2));
+}
+
+int ft_lexcmp_r(t_node *n1, t_node *n2)
+{
+	return (ft_lexcmp(n1, n2) * -1);
 }

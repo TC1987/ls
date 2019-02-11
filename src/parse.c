@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/10 19:41:31 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 06:24:22 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,21 @@ char *create_full_path(char *str1, char *str2)
 	return (full_path);
 }
 
+void parse_subtree(t_node *subtree, unsigned char flags, int (*sorting_function)(t_node *, t_node *))
+{
+	if (subtree == NULL)
+		return ;
+	parse_subtree(subtree->left, flags, sorting_function);
+	parse_dir(subtree, flags, sorting_function);
+	parse_subtree(subtree->right, flags, sorting_function);	
+}
+
+// For errno.
+#include <string.h>
+#include <errno.h>
+
+// Need to check and see folder permissions. Error with /Library/Scripts/42.
+// Need to check a folder that has some folders that are inaccessible.
 void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node *, t_node *))
 {
 	DIR				*dir;
@@ -57,7 +72,10 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 	struct stat		buffer;
 	t_node			*current_node;
 	char			*tmp;
+	int				has_dir;
+	int				lstat_value;
 
+	has_dir = 0;
 	if (!(dir = opendir(node->full_path)))
 		return ;
 	while ((file = readdir(dir)))
@@ -65,16 +83,28 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 		if (!(flags & 1 << a) && file->d_name[0] == '.')
 			continue;
 		tmp = create_full_path(node->full_path, file->d_name);
-		lstat(tmp, &buffer);
-		node->total += buffer.st_blocks;
-		current_node = init_node(buffer, file->d_name, tmp);
-		add_node(&(node->subtree), current_node, sorting_function);
-		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
+		lstat_value = lstat(tmp, &buffer);
+		if (lstat_value < 0 && !(flags & 1 << R))
 		{
-			current_node->type = DIRECTORY;
-			parse_dir(current_node, flags, sorting_function);
+			current_node = init_node(buffer, file->d_name, tmp, INVALID);
+			add_node(&(node->subtree), current_node, sorting_function);
+		}
+		else if (lstat_value < 0)
+			return ;
+		else
+		{
+			node->total += buffer.st_blocks;
+			current_node = init_node(buffer, file->d_name, tmp, VALID);
+			add_node(&(node->subtree), current_node, sorting_function);
+			if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
+			{
+				has_dir = 1;
+				current_node->type = DIRECTORY;
+			}
 		}
 	}
 	closedir(dir);
-	// By the time we get here, the current directory has been fully read and all of its contents are sorted.
+	
+	if (flags & 1 << R && has_dir)
+		parse_subtree(node->subtree, flags, sorting_function);
 }

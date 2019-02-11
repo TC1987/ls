@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/09 03:50:42 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 07:11:45 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,21 @@ int (*get_sorting_function(unsigned char flags))(t_node *, t_node *)
 int main(int argc, char *argv[])
 {
 	unsigned char flags;
+	int error_code;
 	t_trees *trees;
+	int print_name;
 
 	flags = 0;
-	trees = init_tree();
+	if (!(trees = init_tree()))
+		return (0);
 	if (!check_flags(&argv, &flags))
 		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
 	parse_args(&argv, flags, trees);
 	print_invalid(trees->invalid);
-	print_files(trees->valid, flags);
+	print_name = print_files(trees->valid, flags);
 	if (flags & 1 << R)
-		print_recursive(trees->directory, 0, flags);
+		print_recursive(trees->directory, flags, print_name);
 	else
-		print_directories(trees->directory, 0, flags);
-	// while (1);
+		print_directories(trees->directory, flags, print_name);
 	// free();
 }

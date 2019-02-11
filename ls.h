@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/09 03:46:59 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 07:07:48 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ struct	s_node {
 	unsigned int	device;
 	unsigned int	major;
 	unsigned int	minor;
-	unsigned int	type: 1;
+	int	type;
 };
 
 struct	s_trees {
@@ -49,22 +49,21 @@ struct	s_trees {
 };
 
 enum e_flags { l, a, r, t, R };
-enum e_type { NONE, DIRECTORY };
+enum e_type { NONE, VALID, INVALID, DIRECTORY };
 
 int		error(char *message, int code);
 int		update_flag(char f, unsigned char *flags);
 int		check_flags(char ***argv, unsigned char *flags);
-t_node	*init_node(struct stat buffer, char *name, char *full_path);
+t_node	*init_node(struct stat buffer, char *name, char *full_path, int type);
 t_trees	*init_tree();
 t_node	*add_node(t_node **root, t_node *node, int (*sorting_function)(t_node *, t_node *));
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
 void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node *, t_node *));
 void	print_invalid(t_node *current);
-void	print_files(t_node *current, unsigned char flags);
-void	print_files_reverse(t_node *current);
-void	print_directories(t_node *current, int print_name, unsigned char flags);
-void	print_recursive(t_node *current, int print_name, unsigned char flags);
+int		print_files(t_node *current, unsigned char flags);
+void	print_directories(t_node *current, unsigned char flags, int print_name);
+void	print_recursive(t_node *current, unsigned char flags, int print_name);
 
 // long_format.c
 char	*get_mode(struct stat buffer);

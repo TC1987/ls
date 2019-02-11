@@ -1,0 +1,564 @@
+Binary file ./._Makefile matches
+./Makefile:COMPILE = gcc -Wall -Wextra -Werror
+./Makefile:INCLUDE = -I. -I./libft/
+./Makefile:SANITIZE = -fsanitize=address
+./Makefile:	@$(COMPILE_SOFT) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(SANITIZE)
+./Makefile:	@make -C ./libft
+./Makefile:	@make clean -C ./libft
+./Makefile:	@/bin/rm -f $(OBJ)
+./Makefile:	@make fclean -C ./libft
+./Makefile:	@/bin/rm -f $(NAME)
+./.git/info/exclude:# git ls-files --others --exclude-from=.git/info/exclude
+./.git/logs/HEAD:0000000000000000000000000000000000000000 beff7bded9c05bbae47565d83d9c20ae19cfb86d TC1987 <TerrySeongCho@gmail.com> 1549210612 -0800	commit (initial): d
+./.git/logs/HEAD:beff7bded9c05bbae47565d83d9c20ae19cfb86d a6e4ddeb558634eecb36752d9ee102226bcc3707 TC1987 <TerrySeongCho@gmail.com> 1549212141 -0800	commit: d
+./.git/logs/HEAD:a6e4ddeb558634eecb36752d9ee102226bcc3707 81275891dadd8c6fd428ff59b8042d748a4ddc01 TC1987 <TerrySeongCho@gmail.com> 1549443104 -0800	commit: d
+./.git/logs/HEAD:81275891dadd8c6fd428ff59b8042d748a4ddc01 399b7fc52de528c7b00364a9aac4f182fc5d7049 TC1987 <TerrySeongCho@gmail.com> 1549445762 -0800	commit: d
+./.git/logs/HEAD:399b7fc52de528c7b00364a9aac4f182fc5d7049 4bf73790f3db1e036de15c600ab0d2d465eeda25 TC1987 <TerrySeongCho@gmail.com> 1549448621 -0800	commit: d
+./.git/logs/HEAD:4bf73790f3db1e036de15c600ab0d2d465eeda25 324f952668b06a55eca0547771cb4b74eb84e175 TC1987 <TerrySeongCho@gmail.com> 1549452379 -0800	commit: sorted and displaying
+./.git/logs/HEAD:324f952668b06a55eca0547771cb4b74eb84e175 df4c8653073227f45eeb9130af04c88b18f9f79b TC1987 <TerrySeongCho@gmail.com> 1549453470 -0800	commit: before merging add_file_node and add_directory_node
+./.git/logs/HEAD:df4c8653073227f45eeb9130af04c88b18f9f79b 8ced563c1d200be2b3143142a13e015963343e7c TC1987 <TerrySeongCho@gmail.com> 1549453908 -0800	commit: finished merging add_file_node and add_directory_node
+./.git/logs/HEAD:8ced563c1d200be2b3143142a13e015963343e7c 7d658e3a46499a05834b301ffa1810afcfca55e5 TC1987 <TerrySeongCho@gmail.com> 1549545517 -0800	commit: recursion working
+./.git/logs/HEAD:7d658e3a46499a05834b301ffa1810afcfca55e5 86a926eb98ebb268f45b9a46f291ad910cbaaf38 TC1987 <TerrySeongCho@gmail.com> 1549545604 -0800	commit: removed concat function since using ft_strcat
+./.git/logs/HEAD:86a926eb98ebb268f45b9a46f291ad910cbaaf38 227ef759f48867028d7d90492ae38ec8187170e4 TC1987 <TerrySeongCho@gmail.com> 1549547407 -0800	commit: d
+./.git/logs/HEAD:227ef759f48867028d7d90492ae38ec8187170e4 f12f65740770d6a582cd4d89dad8a662f9b9a181 TC1987 <TerrySeongCho@gmail.com> 1549547432 -0800	commit (amend): prints recursively all dirs that are not empty
+./.git/logs/HEAD:f12f65740770d6a582cd4d89dad8a662f9b9a181 96c6fc4eea24bb0c62faf918de53dac755de605b TC1987 <TerrySeongCho@gmail.com> 1549548956 -0800	commit: weird bug with printing
+./.git/logs/HEAD:96c6fc4eea24bb0c62faf918de53dac755de605b 72b0ed1ce8cf8658094afcf28b70c2f04fcd4207 TC1987 <TerrySeongCho@gmail.com> 1549622719 -0800	commit: working recursion
+./.git/logs/HEAD:72b0ed1ce8cf8658094afcf28b70c2f04fcd4207 d6edde40a37a600b35012c326de76bee04c50825 TC1987 <TerrySeongCho@gmail.com> 1549628029 -0800	commit: before print dir names
+./.git/logs/HEAD:d6edde40a37a600b35012c326de76bee04c50825 9643fbf681bf72f0b2d17c3217e3f50d2bcebac2 TC1987 <TerrySeongCho@gmail.com> 1549631354 -0800	commit: fixed -aR
+./.git/logs/HEAD:9643fbf681bf72f0b2d17c3217e3f50d2bcebac2 b4af09e6c308162c7a16cc588601d4e515d12f2d TC1987 <TerrySeongCho@gmail.com> 1549677399 -0800	commit: long format coded. before test.
+./.git/logs/HEAD:b4af09e6c308162c7a16cc588601d4e515d12f2d cf5d37d2134ee5290752d6c7f26162dd31779264 TC1987 <TerrySeongCho@gmail.com> 1549678535 -0800	commit: long format working and tested.
+./.git/logs/HEAD:cf5d37d2134ee5290752d6c7f26162dd31779264 c1f70ca981f46b1948545be12a2333f29d0a9fbf TC1987 <TerrySeongCho@gmail.com> 1549686062 -0800	commit: all flags working... i think
+./.git/logs/HEAD:c1f70ca981f46b1948545be12a2333f29d0a9fbf 594ab8bb7e997e2c6c1b3d3e02b37c89cd2221a6 TC1987 <TerrySeongCho@gmail.com> 1549687038 -0800	commit: d
+./.git/logs/HEAD:594ab8bb7e997e2c6c1b3d3e02b37c89cd2221a6 a59ab3f391b427ddd0afe8b4f8c0031102de1047 TC1987 <TerrySeongCho@gmail.com> 1549687061 -0800	commit (amend): working flags. tested.
+./.git/logs/HEAD:a59ab3f391b427ddd0afe8b4f8c0031102de1047 43183a0ffb351ff14bf682cecab258023ffffdb9 TC1987 <TerrySeongCho@gmail.com> 1549711916 -0800	commit: symbolic link working
+./.git/logs/HEAD:43183a0ffb351ff14bf682cecab258023ffffdb9 ddaa596297c4763dab587403fc7e1118720e50c2 TC1987 <TerrySeongCho@gmail.com> 1549713127 -0800	commit: added total size
+./.git/logs/HEAD:ddaa596297c4763dab587403fc7e1118720e50c2 fe9d436649339e8d0c38caa6f40876a482a5aa64 TC1987 <TerrySeongCho@gmail.com> 1549856511 -0800	commit: before NULL_CHECKs added to init_node
+./.git/logs/refs/remotes/origin/master:0000000000000000000000000000000000000000 beff7bded9c05bbae47565d83d9c20ae19cfb86d TC1987 <TerrySeongCho@gmail.com> 1549210635 -0800	update by push
+./.git/logs/refs/remotes/origin/master:beff7bded9c05bbae47565d83d9c20ae19cfb86d a6e4ddeb558634eecb36752d9ee102226bcc3707 TC1987 <TerrySeongCho@gmail.com> 1549212147 -0800	update by push
+./.git/logs/refs/remotes/origin/master:a6e4ddeb558634eecb36752d9ee102226bcc3707 81275891dadd8c6fd428ff59b8042d748a4ddc01 TC1987 <TerrySeongCho@gmail.com> 1549443110 -0800	update by push
+./.git/logs/refs/remotes/origin/master:81275891dadd8c6fd428ff59b8042d748a4ddc01 399b7fc52de528c7b00364a9aac4f182fc5d7049 TC1987 <TerrySeongCho@gmail.com> 1549445769 -0800	update by push
+./.git/logs/refs/remotes/origin/master:399b7fc52de528c7b00364a9aac4f182fc5d7049 4bf73790f3db1e036de15c600ab0d2d465eeda25 TC1987 <TerrySeongCho@gmail.com> 1549448626 -0800	update by push
+./.git/logs/refs/remotes/origin/master:4bf73790f3db1e036de15c600ab0d2d465eeda25 324f952668b06a55eca0547771cb4b74eb84e175 TC1987 <TerrySeongCho@gmail.com> 1549452387 -0800	update by push
+./.git/logs/refs/remotes/origin/master:324f952668b06a55eca0547771cb4b74eb84e175 df4c8653073227f45eeb9130af04c88b18f9f79b TC1987 <TerrySeongCho@gmail.com> 1549453477 -0800	update by push
+./.git/logs/refs/remotes/origin/master:df4c8653073227f45eeb9130af04c88b18f9f79b 8ced563c1d200be2b3143142a13e015963343e7c TC1987 <TerrySeongCho@gmail.com> 1549453916 -0800	update by push
+./.git/logs/refs/remotes/origin/master:8ced563c1d200be2b3143142a13e015963343e7c 7d658e3a46499a05834b301ffa1810afcfca55e5 TC1987 <TerrySeongCho@gmail.com> 1549545523 -0800	update by push
+./.git/logs/refs/remotes/origin/master:7d658e3a46499a05834b301ffa1810afcfca55e5 86a926eb98ebb268f45b9a46f291ad910cbaaf38 TC1987 <TerrySeongCho@gmail.com> 1549545611 -0800	update by push
+./.git/logs/refs/remotes/origin/master:86a926eb98ebb268f45b9a46f291ad910cbaaf38 f12f65740770d6a582cd4d89dad8a662f9b9a181 TC1987 <TerrySeongCho@gmail.com> 1549547479 -0800	update by push
+./.git/logs/refs/remotes/origin/master:f12f65740770d6a582cd4d89dad8a662f9b9a181 96c6fc4eea24bb0c62faf918de53dac755de605b TC1987 <TerrySeongCho@gmail.com> 1549548962 -0800	update by push
+./.git/logs/refs/remotes/origin/master:96c6fc4eea24bb0c62faf918de53dac755de605b 72b0ed1ce8cf8658094afcf28b70c2f04fcd4207 TC1987 <TerrySeongCho@gmail.com> 1549622726 -0800	update by push
+./.git/logs/refs/remotes/origin/master:72b0ed1ce8cf8658094afcf28b70c2f04fcd4207 d6edde40a37a600b35012c326de76bee04c50825 TC1987 <TerrySeongCho@gmail.com> 1549628035 -0800	update by push
+./.git/logs/refs/remotes/origin/master:d6edde40a37a600b35012c326de76bee04c50825 9643fbf681bf72f0b2d17c3217e3f50d2bcebac2 TC1987 <TerrySeongCho@gmail.com> 1549631361 -0800	update by push
+./.git/logs/refs/remotes/origin/master:9643fbf681bf72f0b2d17c3217e3f50d2bcebac2 b4af09e6c308162c7a16cc588601d4e515d12f2d TC1987 <TerrySeongCho@gmail.com> 1549677416 -0800	update by push
+./.git/logs/refs/remotes/origin/master:b4af09e6c308162c7a16cc588601d4e515d12f2d cf5d37d2134ee5290752d6c7f26162dd31779264 TC1987 <TerrySeongCho@gmail.com> 1549678541 -0800	update by push
+./.git/logs/refs/remotes/origin/master:cf5d37d2134ee5290752d6c7f26162dd31779264 c1f70ca981f46b1948545be12a2333f29d0a9fbf TC1987 <TerrySeongCho@gmail.com> 1549686069 -0800	update by push
+./.git/logs/refs/remotes/origin/master:c1f70ca981f46b1948545be12a2333f29d0a9fbf a59ab3f391b427ddd0afe8b4f8c0031102de1047 TC1987 <TerrySeongCho@gmail.com> 1549687074 -0800	update by push
+./.git/logs/refs/remotes/origin/master:a59ab3f391b427ddd0afe8b4f8c0031102de1047 43183a0ffb351ff14bf682cecab258023ffffdb9 TC1987 <TerrySeongCho@gmail.com> 1549711923 -0800	update by push
+./.git/logs/refs/remotes/origin/master:43183a0ffb351ff14bf682cecab258023ffffdb9 ddaa596297c4763dab587403fc7e1118720e50c2 TC1987 <TerrySeongCho@gmail.com> 1549713134 -0800	update by push
+./.git/logs/refs/remotes/origin/master:ddaa596297c4763dab587403fc7e1118720e50c2 fe9d436649339e8d0c38caa6f40876a482a5aa64 TC1987 <TerrySeongCho@gmail.com> 1549856518 -0800	update by push
+./.git/logs/refs/heads/master:0000000000000000000000000000000000000000 beff7bded9c05bbae47565d83d9c20ae19cfb86d TC1987 <TerrySeongCho@gmail.com> 1549210612 -0800	commit (initial): d
+./.git/logs/refs/heads/master:beff7bded9c05bbae47565d83d9c20ae19cfb86d a6e4ddeb558634eecb36752d9ee102226bcc3707 TC1987 <TerrySeongCho@gmail.com> 1549212141 -0800	commit: d
+./.git/logs/refs/heads/master:a6e4ddeb558634eecb36752d9ee102226bcc3707 81275891dadd8c6fd428ff59b8042d748a4ddc01 TC1987 <TerrySeongCho@gmail.com> 1549443104 -0800	commit: d
+./.git/logs/refs/heads/master:81275891dadd8c6fd428ff59b8042d748a4ddc01 399b7fc52de528c7b00364a9aac4f182fc5d7049 TC1987 <TerrySeongCho@gmail.com> 1549445762 -0800	commit: d
+./.git/logs/refs/heads/master:399b7fc52de528c7b00364a9aac4f182fc5d7049 4bf73790f3db1e036de15c600ab0d2d465eeda25 TC1987 <TerrySeongCho@gmail.com> 1549448621 -0800	commit: d
+./.git/logs/refs/heads/master:4bf73790f3db1e036de15c600ab0d2d465eeda25 324f952668b06a55eca0547771cb4b74eb84e175 TC1987 <TerrySeongCho@gmail.com> 1549452379 -0800	commit: sorted and displaying
+./.git/logs/refs/heads/master:324f952668b06a55eca0547771cb4b74eb84e175 df4c8653073227f45eeb9130af04c88b18f9f79b TC1987 <TerrySeongCho@gmail.com> 1549453470 -0800	commit: before merging add_file_node and add_directory_node
+./.git/logs/refs/heads/master:df4c8653073227f45eeb9130af04c88b18f9f79b 8ced563c1d200be2b3143142a13e015963343e7c TC1987 <TerrySeongCho@gmail.com> 1549453908 -0800	commit: finished merging add_file_node and add_directory_node
+./.git/logs/refs/heads/master:8ced563c1d200be2b3143142a13e015963343e7c 7d658e3a46499a05834b301ffa1810afcfca55e5 TC1987 <TerrySeongCho@gmail.com> 1549545517 -0800	commit: recursion working
+./.git/logs/refs/heads/master:7d658e3a46499a05834b301ffa1810afcfca55e5 86a926eb98ebb268f45b9a46f291ad910cbaaf38 TC1987 <TerrySeongCho@gmail.com> 1549545604 -0800	commit: removed concat function since using ft_strcat
+./.git/logs/refs/heads/master:86a926eb98ebb268f45b9a46f291ad910cbaaf38 227ef759f48867028d7d90492ae38ec8187170e4 TC1987 <TerrySeongCho@gmail.com> 1549547407 -0800	commit: d
+./.git/logs/refs/heads/master:227ef759f48867028d7d90492ae38ec8187170e4 f12f65740770d6a582cd4d89dad8a662f9b9a181 TC1987 <TerrySeongCho@gmail.com> 1549547432 -0800	commit (amend): prints recursively all dirs that are not empty
+./.git/logs/refs/heads/master:f12f65740770d6a582cd4d89dad8a662f9b9a181 96c6fc4eea24bb0c62faf918de53dac755de605b TC1987 <TerrySeongCho@gmail.com> 1549548956 -0800	commit: weird bug with printing
+./.git/logs/refs/heads/master:96c6fc4eea24bb0c62faf918de53dac755de605b 72b0ed1ce8cf8658094afcf28b70c2f04fcd4207 TC1987 <TerrySeongCho@gmail.com> 1549622719 -0800	commit: working recursion
+./.git/logs/refs/heads/master:72b0ed1ce8cf8658094afcf28b70c2f04fcd4207 d6edde40a37a600b35012c326de76bee04c50825 TC1987 <TerrySeongCho@gmail.com> 1549628029 -0800	commit: before print dir names
+./.git/logs/refs/heads/master:d6edde40a37a600b35012c326de76bee04c50825 9643fbf681bf72f0b2d17c3217e3f50d2bcebac2 TC1987 <TerrySeongCho@gmail.com> 1549631354 -0800	commit: fixed -aR
+./.git/logs/refs/heads/master:9643fbf681bf72f0b2d17c3217e3f50d2bcebac2 b4af09e6c308162c7a16cc588601d4e515d12f2d TC1987 <TerrySeongCho@gmail.com> 1549677399 -0800	commit: long format coded. before test.
+./.git/logs/refs/heads/master:b4af09e6c308162c7a16cc588601d4e515d12f2d cf5d37d2134ee5290752d6c7f26162dd31779264 TC1987 <TerrySeongCho@gmail.com> 1549678535 -0800	commit: long format working and tested.
+./.git/logs/refs/heads/master:cf5d37d2134ee5290752d6c7f26162dd31779264 c1f70ca981f46b1948545be12a2333f29d0a9fbf TC1987 <TerrySeongCho@gmail.com> 1549686062 -0800	commit: all flags working... i think
+./.git/logs/refs/heads/master:c1f70ca981f46b1948545be12a2333f29d0a9fbf 594ab8bb7e997e2c6c1b3d3e02b37c89cd2221a6 TC1987 <TerrySeongCho@gmail.com> 1549687038 -0800	commit: d
+./.git/logs/refs/heads/master:594ab8bb7e997e2c6c1b3d3e02b37c89cd2221a6 a59ab3f391b427ddd0afe8b4f8c0031102de1047 TC1987 <TerrySeongCho@gmail.com> 1549687061 -0800	commit (amend): working flags. tested.
+./.git/logs/refs/heads/master:a59ab3f391b427ddd0afe8b4f8c0031102de1047 43183a0ffb351ff14bf682cecab258023ffffdb9 TC1987 <TerrySeongCho@gmail.com> 1549711916 -0800	commit: symbolic link working
+./.git/logs/refs/heads/master:43183a0ffb351ff14bf682cecab258023ffffdb9 ddaa596297c4763dab587403fc7e1118720e50c2 TC1987 <TerrySeongCho@gmail.com> 1549713127 -0800	commit: added total size
+./.git/logs/refs/heads/master:ddaa596297c4763dab587403fc7e1118720e50c2 fe9d436649339e8d0c38caa6f40876a482a5aa64 TC1987 <TerrySeongCho@gmail.com> 1549856511 -0800	commit: before NULL_CHECKs added to init_node
+Binary file ./.git/index matches
+Binary file ./.git/objects/b5/e24c77740bae52c6a47cada790edb968d342f7 matches
+Binary file ./.git/objects/b5/5ea4ce656a48b337b96f110410c09e1c652418 matches
+Binary file ./.git/objects/41/507bf28a3a433af5e6fca7e11066adfb5ef60b matches
+Binary file ./.git/objects/99/c5b174f1f0ddea36ecde5832101e1ff8952055 matches
+Binary file ./.git/objects/f5/476ff194b052ab197f24edccb637e025396622 matches
+Binary file ./.git/objects/f5/87bcc1e7dbf515c942ad05749a92ad2dde3c16 matches
+Binary file ./.git/objects/e4/05a789fab9a8dd7cda58fe837243de1a85a3c1 matches
+Binary file ./.git/objects/fc/9d60135fde84a8ac219625f6489fc511e80ba1 matches
+Binary file ./.git/objects/fc/9ea7998f71639bb7ec80ed5f4ad2db33ce4758 matches
+Binary file ./.git/objects/57/eff99dabacf74c072d919ca8c4419d61b2c7f7 matches
+Binary file ./.git/objects/57/b690dc22c2cc59704f61f066d26514f409058b matches
+Binary file ./.git/objects/d6/93f87a1963a528001539a1c495f668da2a69c0 matches
+Binary file ./.git/objects/0f/2b787f686a8df13eae23021afda03cbb1c40e1 matches
+Binary file ./.git/objects/0f/47de03b61eb3dd86fb1b25f3bf6baf40227aad matches
+Binary file ./.git/objects/e6/0fede5a7b837b6c81864610e52e09429f2e107 matches
+Binary file ./.git/objects/10/a948e4947a110b2e141f12fa0d417d4212a03d matches
+Binary file ./.git/objects/7a/c1f6bc90d6945fd6afe922e71fac3e013230ab matches
+Binary file ./.git/objects/07/2f3426e358377ecc21ea300be68bc0a275fae3 matches
+Binary file ./.git/objects/07/b884d1113de61d0700718329f2535808fb55cb matches
+Binary file ./.git/objects/7d/c54beb3e0c2a141736312acce6be8501d76cf3 matches
+Binary file ./.git/objects/4b/5bd5e972d26204a9054d655407b105c710fbce matches
+Binary file ./.git/objects/d4/b86a224d00ce96967202a5af432eef3f896d3e matches
+Binary file ./.git/objects/3d/4266eaeb8f5276216b39e7a4b9f42450ece4b6 matches
+Binary file ./.git/objects/3d/db17ba9dd6d46057ecfb9b64df1fcbdb90390f matches
+Binary file ./.git/objects/94/7b200b18618ffe029f2c82026a78cabb2d4a08 matches
+Binary file ./.git/objects/94/0d329f2708eaa7d2bd298b738e938ffb806e79 matches
+Binary file ./.git/objects/fd/1c8bd0dbb78fecbd7dbfc0366d1e5b7851a31f matches
+Binary file ./.git/objects/fd/07fe0a3226b6ca2fe814c19bf24459ae08681b matches
+Binary file ./.git/objects/68/d49f67e6b80140baa347eb7ba27ba458b096cf matches
+Binary file ./.git/objects/c3/de25bae4a0aa131d79c3a88fb6cb7e7ed64d78 matches
+Binary file ./.git/objects/50/f5d9df3c762b6e00eacd76cfda724112181871 matches
+Binary file ./.git/objects/50/3a73a21d060bdb28245acb84842858b88245a5 matches
+Binary file ./.git/objects/a6/bff9e33be07f1a66d7e961c803f24a066cf020 matches
+Binary file ./.git/objects/a6/2b9089318595569f32640e2b69c31c945a74e3 matches
+Binary file ./.git/objects/a6/02cd6db54f0f3a6b1561e5610f5ea9b055e4e1 matches
+Binary file ./.git/objects/ce/723539219833325eb87200fb0b32b6c3dcd00d matches
+Binary file ./.git/objects/96/43fbf681bf72f0b2d17c3217e3f50d2bcebac2 matches
+Binary file ./.git/objects/96/c6fc4eea24bb0c62faf918de53dac755de605b matches
+Binary file ./.git/objects/96/7c233d9d489b928180924dd3ecd70bc9ce15cb matches
+Binary file ./.git/objects/f3/04132e8c8b1534732f402a7e1ae81168749269 matches
+Binary file ./.git/objects/e3/961c4e8895f38356b0b3e457559523d82c7fe6 matches
+Binary file ./.git/objects/e3/607ab3a0f66e4d78e547b45783630850f7cf81 matches
+Binary file ./.git/objects/e3/736ffbc8da17898f60bad386e96c943d7fdc85 matches
+Binary file ./.git/objects/e1/4f17b1e5f4873fe85adedc53407efcd15853e6 matches
+Binary file ./.git/objects/e1/e252492dd93c0cab652be5f97a50f19b7c58f7 matches
+Binary file ./.git/objects/34/550010f3aadd0d86ff7bc1733271f9f08c620c matches
+Binary file ./.git/objects/c9/00b07b16d24f330aaead744e7d68cdabded4c8 matches
+Binary file ./.git/objects/8b/e09c9ce7f9859486915cbf2ba2a06926296a60 matches
+Binary file ./.git/objects/8b/6b95ed498ba10e1b64c5664399158033f3c6ec matches
+Binary file ./.git/objects/8b/1b8f9c9ca57d3218dc1313feec3ee6892dd6a4 matches
+Binary file ./.git/objects/78/4379ee799c0e5ab8ae1c81f6fe5fb4c4cfc031 matches
+Binary file ./.git/objects/2c/e79250dd61559c1888ed03efa4194bf6624fd0 matches
+Binary file ./.git/objects/4a/23cd23f07157c858403a55ca412620d6c20c08 matches
+Binary file ./.git/objects/81/8e27ff07b5dcc3464ca9cacbeba1a54f496b2a matches
+Binary file ./.git/objects/e5/651130f0888fe7e745745feb5fe47500305aad matches
+Binary file ./.git/objects/e5/2f5a010aac2d68dc34ae7b3b662079c481fd00 matches
+Binary file ./.git/objects/7e/c17d6b12cb15b854e981462b3960e7b3e178c2 matches
+Binary file ./.git/objects/7e/a87b3083b984d9f023bc696797552fc15c192b matches
+Binary file ./.git/objects/90/e209f3c92f0deefda333ed4ed4a342701c4ada matches
+Binary file ./.git/objects/45/a7c8153a163b27d27cf158005047278be4db35 matches
+Binary file ./.git/objects/4f/219bd9b7912ef0ab267e6b78478d70cda3e67a matches
+Binary file ./.git/objects/53/671c95f31fd6473a1f45d683e0976e1e86f324 matches
+Binary file ./.git/objects/53/609d2b4cac08475b26bc4a4525ce70fd7122cd matches
+Binary file ./.git/objects/53/e72bd13a1e4e28f6420bfc40dfdbc337a6105f matches
+Binary file ./.git/objects/5e/df764e34c97768b15f80bc8fdd1327711da87e matches
+Binary file ./.git/objects/c4/399479ec962c4f9775da445f03b559a733bee3 matches
+Binary file ./.git/objects/c4/d0c0374aa058c0bd94b65f8dba8e4973368f9c matches
+Binary file ./.git/objects/c4/66854264736abab435c59f62cdd688ff366be2 matches
+Binary file ./.git/objects/f2/212741d3a49ff39f04971cbc69515e2848dc0b matches
+Binary file ./.git/objects/2f/8b21b097f69b430b7cbeedd63dcbebd4c76ffe matches
+Binary file ./.git/objects/2f/35d4452d1ec4d6a5119c924ba44c43f54d347e matches
+Binary file ./.git/objects/49/52aa78bc19f1fbc14da120e628862731030cf9 matches
+Binary file ./.git/objects/2a/b5b91f6c9dea581c24da7139980ec83b6ef059 matches
+Binary file ./.git/objects/f0/cad248bb70bab7e4579506286cba836f6c11e8 matches
+Binary file ./.git/objects/f0/c23505419488eaf7a3ef13c6fa2c3d87ed45d7 matches
+Binary file ./.git/objects/23/0fd7b1900309121da274088ca5750717bc4b03 matches
+Binary file ./.git/objects/83/99d7916bd7d43b7a535211de8e11f338dd5cf1 matches
+Binary file ./.git/objects/65/997cd674a1440dac9caf50fe450a8fa0fff90f matches
+Binary file ./.git/objects/65/d4b510154a43a3f4bbe4a3ba282fbe03edf6eb matches
+Binary file ./.git/objects/65/50abfac6a53d40c4e01ceb5220c5ed89cc30b1 matches
+Binary file ./.git/objects/f6/84394903791cdba517d0192560775332a080f7 matches
+Binary file ./.git/objects/c6/9864853ef67624aa2731fec8c9e63310bc12af matches
+Binary file ./.git/objects/f9/9f6b206ce3877f0e353f658062a49bd2eefded matches
+Binary file ./.git/objects/04/64e8c7c9a295a1236c155759117c2464f9b01d matches
+Binary file ./.git/objects/04/ba480002a99a72d758317ac841add8a7acacd5 matches
+Binary file ./.git/objects/17/23eac915792e61d13b668b9d17564da748a5e1 matches
+Binary file ./.git/objects/17/6813b043c4551008ccb1853fde2ccb5c36c004 matches
+Binary file ./.git/objects/a7/e60e6de63a5d70c272781ae369a783647fb239 matches
+Binary file ./.git/objects/a7/d8f255d43e116f3fca3276cafc0b2147b676dd matches
+Binary file ./.git/objects/b9/7759a9050ac1ce458c8785bf86a9a5567b3e5d matches
+Binary file ./.git/objects/8f/704cb8d9b4f9fcf8546dbc2553f5f8681bcba5 matches
+Binary file ./.git/objects/8f/e2c3f8c4f0449eda666610182e7c032c5700c0 matches
+Binary file ./.git/objects/8f/9412925e79bf8633ce35b7b57f0c6ed1f8e59a matches
+Binary file ./.git/objects/9e/7648f96c26050c1ef94e95377037668270e39b matches
+Binary file ./.git/objects/b0/00109f5f001687f8cd31c5f4c5a540d1b4a7ca matches
+Binary file ./.git/objects/b0/3a7e52cac172658d10fefa8894fbd303770755 matches
+Binary file ./.git/objects/61/66e165099e23dbf7aaefa0f0348dcef93b9e52 matches
+Binary file ./.git/objects/61/7a944f507a7602a3cc36aa16b58fc7a941ecc7 matches
+Binary file ./.git/objects/60/f02fbafd428ee2c9560a18ca71952c57fb28e2 matches
+Binary file ./.git/objects/b1/04db1b5c47150c6a06afe661e45540640c47fc matches
+Binary file ./.git/objects/98/a82626d60108729e9f8f3a27bfcce68ce55f26 matches
+Binary file ./.git/objects/98/b1eca88c3a7c8cf7c2b729e7a1b8551efb572d matches
+Binary file ./.git/objects/26/dfe163519af62c23264081a85031c6547dfb40 matches
+Binary file ./.git/objects/26/dcaacfaf18e68d798689a77e2d79f5c2654122 matches
+Binary file ./.git/objects/5b/396b508755ed2a77b946b29e9bc1a834285e57 matches
+Binary file ./.git/objects/5c/cdb608958150f1e6569b47f834cf978416ac32 matches
+Binary file ./.git/objects/5c/10a243917a18541faccafc035be7eee08c9fca matches
+Binary file ./.git/objects/15/d0942bb886ee45660721c6a153248095de1439 matches
+Binary file ./.git/objects/43/183a0ffb351ff14bf682cecab258023ffffdb9 matches
+Binary file ./.git/objects/43/251c7ac8993b9f2603c3b77b93486b022e8491 matches
+Binary file ./.git/objects/62/d975a836fd9e8807611c60a2e59fce45234916 matches
+Binary file ./.git/objects/62/442987ab4b112a4d7de3433c8474f14f8dc86a matches
+Binary file ./.git/objects/b8/a866e4b55424250ce06bc5cf56ea0133c55254 matches
+Binary file ./.git/objects/b8/074553301f978b456bb4130a89b6657582d3ed matches
+Binary file ./.git/objects/48/65eaf437d8215e9bf50f6a1c585302886a49d1 matches
+Binary file ./.git/objects/f1/aa3f820af56c7a15a3e68e679498bf1e6be7d7 matches
+Binary file ./.git/objects/f1/c44e05438481982c2ad2eb2ee997851fa5ece9 matches
+Binary file ./.git/objects/66/c69c5a304a05d5489dbbea0ab07cc7bda0d0a7 matches
+Binary file ./.git/objects/66/477d575d9e72628c7cd385762bc165f129bcbf matches
+Binary file ./.git/objects/ad/e550e0655ef4a5564ad056cfe9f211472609d2 matches
+Binary file ./.git/objects/c5/1e726325f97ef6d079ed7391da54328eed65ef matches
+Binary file ./.git/objects/89/b85e86b79ccbf913d5d9cabab69660e481b6a2 matches
+Binary file ./.git/objects/89/8da295cc942314881a3ace505808b2eb5522dd matches
+Binary file ./.git/objects/89/a43743440af8147189bba209579d558315fa72 matches
+Binary file ./.git/objects/c1/b16d30e442488e0bda5a2aa8af6c7cb390c2f6 matches
+Binary file ./.git/objects/0a/9184e2d3e6ac21239334e9afd23bebced55657 matches
+Binary file ./.git/objects/0a/0ee9b93b49abfee5fe23ae50d1ae4b6fdc9b86 matches
+Binary file ./.git/objects/0a/61cc6a13a9e7d3893503147bcdeb80cb034aea matches
+Binary file ./.git/objects/7b/adba833b25af41c0f7cab41bcb4d3e1b2e2b8a matches
+Binary file ./.git/objects/6f/b209e479221253e5450fe4a41f6875cd723f53 matches
+Binary file ./.git/objects/4c/3cd3b62be5daa296f52eba561150682c87bf5a matches
+Binary file ./.git/objects/46/2cd4ad02d6d24436e03605934fa034c32ea43d matches
+Binary file ./.git/objects/46/607b5106e1d622c46c1d0602d46d724e155925 matches
+Binary file ./.git/objects/4d/41b9fab8b7366f1aaaaa381970f5db62e4f0dd matches
+Binary file ./.git/objects/39/b1185734fe66b38c073e8e98f6be6b3cda4a36 matches
+Binary file ./.git/objects/6d/f58541e78b713167cdfee2daec7ee003f9aa59 matches
+Binary file ./.git/objects/77/ac29fb9a386829ccac00fb4145bb6849eccb53 matches
+Binary file ./.git/objects/77/e2cbc509af84bfa24f2069286b9ab5891d42f9 matches
+Binary file ./.git/objects/77/678937a457d1f4945ebf4d61f9e3d440744cb0 matches
+Binary file ./.git/objects/11/18629ecfe67580b31fa0ff4ce3c21418675aff matches
+Binary file ./.git/objects/11/6c078f275bf8eb28015343c9168f596dfe50be matches
+Binary file ./.git/objects/11/46bafe0f348dd1bb87a28149e21733a0756f31 matches
+Binary file ./.git/objects/9d/345ba47eea67c30d40b9868cad05d5f8d5a733 matches
+Binary file ./.git/objects/6e/7dc8f20bb4047d6464dc7e668bf46b94003c5b matches
+Binary file ./.git/objects/09/36da1ffe6856931f64b007110a56b2c0a3e4f5 matches
+Binary file ./.git/objects/d2/942387042bbc7ed3974edfaee1d840d7ae4a43 matches
+Binary file ./.git/objects/d2/3550de42d7ff222baa7cf113f7d938301d2414 matches
+Binary file ./.git/objects/47/079c5fbede4b33907066bd1d79ee8645a93c04 matches
+Binary file ./.git/objects/47/e20f344d44f7a7163e640bc913577feaae7437 matches
+Binary file ./.git/objects/a0/ac9c423db29a6057a5744966fbd31448e1f8f6 matches
+Binary file ./.git/objects/51/7c8eab7313eacc1c2e395cf6bf9f835dbbad8d matches
+Binary file ./.git/objects/51/f6f35a19cd483b66a19e46fde56f72d53ad4d3 matches
+Binary file ./.git/objects/ed/52dc58fefdcc34baebbf3217255098b0d0c722 matches
+Binary file ./.git/objects/ed/27de01a08bf6c5ccc6222883ca88a5fc92577e matches
+Binary file ./.git/objects/ed/aee98b6a2e103a68e423c7915ee2db4022c139 matches
+Binary file ./.git/objects/ed/8759bbaa2a7a051156d9985f3c323c2aba5843 matches
+Binary file ./.git/objects/ed/2d96be2582a2ce2555fe3a4eff0cf53b8901f2 matches
+Binary file ./.git/objects/79/4c56c3aa7c71a8974d6201ad8e0144ec5550fa matches
+Binary file ./.git/objects/79/9e4de58974e90eebd31bd1fb5ca8c0b1c6a521 matches
+Binary file ./.git/objects/a8/076d8a198399c11fd56bc29e5f788b16a3890f matches
+Binary file ./.git/objects/a8/7ea455c20527897b7714af94c351d9ae23df93 matches
+Binary file ./.git/objects/32/ac152cd01694e737243852c88c4d38f3709fc2 matches
+Binary file ./.git/objects/1a/0b9ffff3c9d654cd53b9f682be6a73cca11ee7 matches
+Binary file ./.git/objects/1a/5dd792e7f49eefd3fff1acdce27d19099b9e77 matches
+Binary file ./.git/objects/1a/286c561706fdd96f73b1edfec7c0cc8827ede7 matches
+Binary file ./.git/objects/6a/22506abe85084e67155b2207da25955d1da139 matches
+Binary file ./.git/objects/63/a0a94e598d08f24df7296adb6101cc7d5baa9a matches
+Binary file ./.git/objects/76/5e98614db88f7c1cbbcd992a97dfcf9270ecc0 matches
+Binary file ./.git/objects/ef/fc3587d005a073838c848024f4928331f932b6 matches
+Binary file ./.git/objects/cc/d06699cb3eee58ed3c565b9dd2342287effcf1 matches
+Binary file ./.git/objects/54/a955291240af8c1e2bed3b27a9c3d789a4b191 matches
+Binary file ./.git/objects/56/819270242c152fe5056e34276153ee0ec75676 matches
+Binary file ./.git/objects/56/4e614c6c7d0549ed827a2926441ef47eddb86c matches
+Binary file ./.git/objects/56/d2db588c5b245394b301c96ea4b4cfc1745fc8 matches
+Binary file ./.git/objects/13/222720bd1170ac41e35f30159c867b943e176f matches
+Binary file ./.git/objects/05/f3aac830e0e5efe5197a7f7b29c010a4ec8af5 matches
+Binary file ./.git/objects/a1/85a2ee2be8f50986f08ec67accabfaa13d1140 matches
+Binary file ./.git/objects/87/f7349dc3dc8b2599050ac4444d440c179fa70c matches
+Binary file ./.git/objects/e0/ac4fd127edbb9b0682dc48cb63e22d15e7b197 matches
+Binary file ./.git/objects/3b/1adf6f316d6c3a60cce4bfe3e0d34740c61ff0 matches
+Binary file ./.git/objects/3b/88d60a1b8f394e2a2fa0aaa69db4af34b449a6 matches
+Binary file ./.git/objects/4e/d3c078986938e17164921f6756ab75cdab6301 matches
+Binary file ./.git/objects/8d/12491f234321a2d4ea85b68b30ab5e57db02f4 matches
+Binary file ./.git/objects/18/2b7cb39091b0e89303fbe4fef2a1b6042de80f matches
+Binary file ./.git/objects/eb/7ccfae2e8fb133e33da2d2f5413d0edb42fb80 matches
+Binary file ./.git/objects/1f/c4c76dae1049e29d3ad80de811b4ed07d577dc matches
+Binary file ./.git/objects/1f/a14d0d9feb637382190403dc0647622b87e7ee matches
+Binary file ./.git/objects/19/936de14aba4784a2a52b6223c5d21746883433 matches
+Binary file ./.git/objects/1d/90684be98f1aed46c306a3cbc1ca98936667cf matches
+Binary file ./.git/objects/30/96c1b710871ab0fb42158ee0abcc1f295a59c3 matches
+Binary file ./.git/objects/1c/dc8c1f57b7cbf3741c08a677d9977634afd951 matches
+Binary file ./.git/objects/ae/56cb8b9b4de1ceca5249977a0357bbd0d4d200 matches
+Binary file ./.git/objects/7c/c99a7e350cd93202fa71b61db408f40ee4493c matches
+Binary file ./.git/objects/7c/675fb0d88018f07619f870a3c81dcc4348474e matches
+Binary file ./.git/objects/7c/42d4652b5bb8a837902f22f271489584f8d088 matches
+Binary file ./.git/objects/7c/fc0f02d55095edce7785d44c49776ce738222b matches
+./.git/hooks/applypatch-msg.sample:# applypatch from an e-mail message.
+./.git/hooks/applypatch-msg.sample:# The hook should exit with non-zero status after issuing an
+./.git/hooks/applypatch-msg.sample:# To enable this hook, rename this file to "applypatch-msg".
+./.git/hooks/applypatch-msg.sample:. git-sh-setup
+./.git/hooks/applypatch-msg.sample:commitmsg="$(git rev-parse --git-path hooks/commit-msg)"
+./.git/hooks/applypatch-msg.sample:test -x "$commitmsg" && exec "$commitmsg" ${1+"$@"}
+./.git/hooks/pre-receive.sample:# To enable this hook, rename this file to "pre-receive".
+./.git/hooks/pre-receive.sample:if test -n "$GIT_PUSH_OPTION_COUNT"
+./.git/hooks/pre-receive.sample:	while test "$i" -lt "$GIT_PUSH_OPTION_COUNT"
+./.git/hooks/pre-receive.sample:			echo "echo from the pre-receive-hook: ${value#*=}" >&2
+./.git/hooks/fsmonitor-watchman.sample:# To enable this hook, rename this file to "query-watchman" and set
+./.git/hooks/fsmonitor-watchman.sample:# 'git config core.fsmonitor .git/hooks/query-watchman'
+./.git/hooks/fsmonitor-watchman.sample:	die "Unsupported query-fsmonitor hook version '$version'.\n" .
+./.git/hooks/fsmonitor-watchman.sample:	my $pid = open2(\*CHLD_OUT, \*CHLD_IN, 'watchman -j --no-pretty')
+./.git/hooks/fsmonitor-watchman.sample:	my $o = $json_pkg->new->utf8->decode($response);
+./.git/hooks/fsmonitor-watchman.sample:	if ($retry > 0 and $o->{error} and $o->{error} =~ m/unable to resolve root .* directory (.*) is not watched/) {
+./.git/hooks/fsmonitor-watchman.sample:		$retry--;
+./.git/hooks/fsmonitor-watchman.sample:	die "Watchman: $o->{error}.\n" .
+./.git/hooks/fsmonitor-watchman.sample:	    "Falling back to scanning...\n" if $o->{error};
+./.git/hooks/fsmonitor-watchman.sample:	print @{$o->{files}};
+./.git/hooks/commit-msg.sample:# that has the commit message.  The hook should exit with non-zero
+./.git/hooks/commit-msg.sample:# To enable this hook, rename this file to "commit-msg".
+./.git/hooks/commit-msg.sample:# Uncomment the below to add a Signed-off-by line to the message.
+./.git/hooks/commit-msg.sample:# Doing this in a hook is a bad idea in general, but the prepare-commit-msg
+./.git/hooks/commit-msg.sample:# SOB=$(git var GIT_AUTHOR_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+./.git/hooks/commit-msg.sample:# grep -qs "^$SOB" "$1" || echo "$SOB" >> "$1"
+./.git/hooks/commit-msg.sample:# This example catches duplicate Signed-off-by lines.
+./.git/hooks/commit-msg.sample:test "" = "$(grep '^Signed-off-by: ' "$1" |
+./.git/hooks/commit-msg.sample:	 sort | uniq -c | sed -e '/^[ 	]*1[ 	]/d')" || {
+./.git/hooks/commit-msg.sample:	echo >&2 Duplicate Signed-off-by lines.
+./.git/hooks/pre-commit.sample:# exit with non-zero status after issuing an appropriate message if
+./.git/hooks/pre-commit.sample:# To enable this hook, rename this file to "pre-commit".
+./.git/hooks/pre-commit.sample:if git rev-parse --verify HEAD >/dev/null 2>&1
+./.git/hooks/pre-commit.sample:# If you want to allow non-ASCII filenames set this variable to true.
+./.git/hooks/pre-commit.sample:allownonascii=$(git config --bool hooks.allownonascii)
+./.git/hooks/pre-commit.sample:# Cross platform projects tend to avoid non-ASCII filenames; prevent
+./.git/hooks/pre-commit.sample:	test $(git diff --cached --name-only --diff-filter=A -z $against |
+./.git/hooks/pre-commit.sample:	  LC_ALL=C tr -d '[ -~]\0' | wc -c) != 0
+./.git/hooks/pre-commit.sample:Error: Attempt to add a non-ASCII file name.
+./.git/hooks/pre-commit.sample:exec git diff-index --check --cached $against --
+./.git/hooks/update.sample:# Called by "git receive-pack" with arguments: refname sha1-old sha1-new
+./.git/hooks/update.sample:# ------
+./.git/hooks/update.sample:# --- Command line
+./.git/hooks/update.sample:# --- Safety check
+./.git/hooks/update.sample:if [ -z "$GIT_DIR" ]; then
+./.git/hooks/update.sample:if [ -z "$refname" -o -z "$oldrev" -o -z "$newrev" ]; then
+./.git/hooks/update.sample:# --- Config
+./.git/hooks/update.sample:allowunannotated=$(git config --bool hooks.allowunannotated)
+./.git/hooks/update.sample:allowdeletebranch=$(git config --bool hooks.allowdeletebranch)
+./.git/hooks/update.sample:denycreatebranch=$(git config --bool hooks.denycreatebranch)
+./.git/hooks/update.sample:allowdeletetag=$(git config --bool hooks.allowdeletetag)
+./.git/hooks/update.sample:allowmodifytag=$(git config --bool hooks.allowmodifytag)
+./.git/hooks/update.sample:projectdesc=$(sed -e '1q' "$GIT_DIR/description")
+./.git/hooks/update.sample:# --- Check types
+./.git/hooks/update.sample:	newrev_type=$(git cat-file -t $newrev)
+./.git/hooks/update.sample:		# un-annotated tag
+./.git/hooks/update.sample:			echo "*** The un-annotated tag, $short_refname, is not allowed in this repository" >&2
+./.git/hooks/update.sample:			echo "*** Use 'git tag [ -a | -s ]' for tags you want to propagate." >&2
+./.git/hooks/update.sample:		if [ "$allowmodifytag" != "true" ] && git rev-parse $refname > /dev/null 2>&1
+./.git/hooks/update.sample:		if [ "$oldrev" = "$zero" -a "$denycreatebranch" = "true" ]; then
+./.git/hooks/update.sample:# --- Finished
+./.git/hooks/post-update.sample:# To enable this hook, rename this file to "post-update".
+./.git/hooks/post-update.sample:exec git update-server-info
+./.git/hooks/pre-applypatch.sample:# by applypatch from an e-mail message.
+./.git/hooks/pre-applypatch.sample:# The hook should exit with non-zero status after issuing an
+./.git/hooks/pre-applypatch.sample:# To enable this hook, rename this file to "pre-applypatch".
+./.git/hooks/pre-applypatch.sample:. git-sh-setup
+./.git/hooks/pre-applypatch.sample:precommit="$(git rev-parse --git-path hooks/pre-commit)"
+./.git/hooks/pre-applypatch.sample:test -x "$precommit" && exec "$precommit" ${1+"$@"}
+./.git/hooks/pre-rebase.sample:# The "pre-rebase" hook is run just before "git rebase" starts doing
+./.git/hooks/pre-rebase.sample:# non-zero status.
+./.git/hooks/pre-rebase.sample:# $1 -- the upstream the series was forked from.
+./.git/hooks/pre-rebase.sample:# $2 -- the branch being rebased (or empty when rebasing the current branch).
+./.git/hooks/pre-rebase.sample:	topic=`git symbolic-ref HEAD` ||
+./.git/hooks/pre-rebase.sample:git show-ref -q "$topic" || {
+./.git/hooks/pre-rebase.sample:not_in_master=`git rev-list --pretty=oneline ^master "$topic"`
+./.git/hooks/pre-rebase.sample:if test -z "$not_in_master"
+./.git/hooks/pre-rebase.sample:only_next_1=`git rev-list ^master "^$topic" ${publish} | sort`
+./.git/hooks/pre-rebase.sample:only_next_2=`git rev-list ^master           ${publish} | sort`
+./.git/hooks/pre-rebase.sample:	not_in_topic=`git rev-list "^$topic" master`
+./.git/hooks/pre-rebase.sample:	if test -z "$not_in_topic"
+./.git/hooks/pre-rebase.sample:	not_in_next=`git rev-list --pretty=oneline ^${publish} "$topic"`
+./.git/hooks/pre-rebase.sample:	/usr/bin/perl -e '
+./.git/hooks/pre-rebase.sample:			/^([0-9a-f]+) /;
+./.git/hooks/pre-rebase.sample:				/^([0-9a-f]+) (.*)$/;
+./.git/hooks/pre-rebase.sample:			if (!exists $not_in_next{$elem->[0]}) {
+./.git/hooks/pre-rebase.sample:				print STDERR " $elem->[1]\n";
+./.git/hooks/pre-rebase.sample:    build on top of it -- other people may already want to
+./.git/hooks/pre-rebase.sample:		   o---o---o---o---o---o---o---o---o---o "next"
+./.git/hooks/pre-rebase.sample:		 /   a---a---b A     /           /
+./.git/hooks/pre-rebase.sample:	       /   /   c---c---c---c B         /
+./.git/hooks/pre-rebase.sample:	     /   /   /   b---b C     \       /
+./.git/hooks/pre-rebase.sample:    ---o---o---o---o---o---o---o---o---o---o---o "master"
+./.git/hooks/pre-rebase.sample:	git rev-list ^master ^topic next
+./.git/hooks/pre-rebase.sample:	git rev-list ^master        next
+./.git/hooks/pre-rebase.sample:	git rev-list master..topic
+./.git/hooks/pre-push.sample:# pushed.  If this script exits with a non-zero status nothing will be pushed.
+./.git/hooks/pre-push.sample:# $1 -- Name of the remote to which the push is being done
+./.git/hooks/pre-push.sample:# $2 -- URL to which the push is being done
+./.git/hooks/pre-push.sample:		commit=`git rev-list -n 1 --grep '^WIP' "$range"`
+./.git/hooks/pre-push.sample:		if [ -n "$commit" ]
+./.git/hooks/prepare-commit-msg.sample:# message file.  If the hook fails with a non-zero status,
+./.git/hooks/prepare-commit-msg.sample:# To enable this hook, rename this file to "prepare-commit-msg".
+./.git/hooks/prepare-commit-msg.sample:# The second includes the output of "git diff --name-status -r"
+./.git/hooks/prepare-commit-msg.sample:# commented because it doesn't cope with --amend or with squashed
+./.git/hooks/prepare-commit-msg.sample:# The third example adds a Signed-off-by line to the message, that can
+./.git/hooks/prepare-commit-msg.sample:/usr/bin/perl -i.bak -ne 'print unless(m/^. Please enter the commit message/..m/^#$/)' "$COMMIT_MSG_FILE"
+./.git/hooks/prepare-commit-msg.sample:#    /usr/bin/perl -i.bak -pe '
+./.git/hooks/prepare-commit-msg.sample:#       print "\n" . `git diff --cached --name-status -r`
+./.git/hooks/prepare-commit-msg.sample:# SOB=$(git var GIT_COMMITTER_IDENT | sed -n 's/^\(.*>\).*$/Signed-off-by: \1/p')
+./.git/hooks/prepare-commit-msg.sample:# git interpret-trailers --in-place --trailer "$SOB" "$COMMIT_MSG_FILE"
+./.git/hooks/prepare-commit-msg.sample:# if test -z "$COMMIT_SOURCE"
+./.git/hooks/prepare-commit-msg.sample:#   /usr/bin/perl -i.bak -pe 'print "\n" if !$first_line++' "$COMMIT_MSG_FILE"
+./main.c:// How to determine if a node is a directory or not for printing? Currently doing node->is_dir = 1 which is ghetto. How else to determine if directory node?
+./main.c:		return error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0);
+./main.c:	print_invalid(trees->invalid);
+./main.c:	print_files(trees->valid, flags);
+./main.c:		print_recursive(trees->directory, 0, flags);
+./main.c:		print_directories(trees->directory, 0, flags);
+Binary file ./src/.add.c.swp matches
+./src/add.c:		if ((*root)->left == NULL)
+./src/add.c:			return (*root)->left = node;
+./src/add.c:		add_node(&(*root)->left, node, sorting_function);
+./src/add.c:		if ((*root)->right == NULL)
+./src/add.c:			return (*root)->right = node;
+./src/add.c:		add_node(&(*root)->right, node, sorting_function);
+./src/add.c:		add_node(&(trees->invalid), node, ft_lexcmp);
+./src/add.c:		add_node(&(trees->valid), node, sorting_function);
+./src/add.c:		add_node(&(trees->directory), node, sorting_function);
+./src/add.c:		node->type = DIRECTORY;
+./src/parse.c:	parse_subtree(subtree->left, flags, sorting_function);
+./src/parse.c:	parse_subtree(subtree->right, flags, sorting_function);	
+./src/parse.c:	if (!(dir = opendir(node->full_path)))
+./src/parse.c:		if (!(flags & 1 << a) && file->d_name[0] == '.')
+./src/parse.c:		tmp = create_full_path(node->full_path, file->d_name);
+./src/parse.c:		node->total += buffer.st_blocks;
+./src/parse.c:		current_node = init_node(buffer, file->d_name, tmp);
+./src/parse.c:		add_node(&(node->subtree), current_node, sorting_function);
+./src/parse.c:		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
+./src/parse.c:			current_node->type = DIRECTORY;
+./src/parse.c:		parse_subtree(node->subtree, flags, sorting_function);
+Binary file ./src/.parse.c.swp matches
+./src/init.c:	if ((read = readlink(full_path, linkname, 512)) == -1)
+./src/init.c:	node->name = ft_strdup(name);
+./src/init.c:	node->full_path = full_path;
+./src/init.c:	node->left = NULL;
+./src/init.c:	node->right = NULL;
+./src/init.c:	node->subtree = NULL;
+./src/init.c:	node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), buffer.st_mtime);
+./src/init.c:	node->mode = get_mode(buffer);
+./src/init.c:	node->linkname = get_linkname(buffer, full_path);
+./src/init.c:	node->group = ft_strdup(getgrgid(buffer.st_gid)->gr_name);
+./src/init.c:	node->user = ft_strdup(getpwuid(buffer.st_uid)->pw_name);
+./src/init.c:	node->size = buffer.st_size;
+./src/init.c:	node->links = buffer.st_nlink;
+./src/init.c:	node->total = 0;
+./src/init.c:	node->numtime = buffer.st_mtime;
+./src/init.c:	node->nanoseconds = buffer.st_mtimespec.tv_nsec;
+./src/init.c:	node->device = buffer.st_rdev;
+./src/init.c:	node->major = major(buffer.st_rdev);
+./src/init.c:	node->minor = minor(buffer.st_rdev);
+./src/init.c:	node->type = NONE;
+./src/init.c:	tree->invalid = NULL;
+./src/init.c:	tree->valid = NULL;
+./src/init.c:	tree->directory = NULL;
+./src/display.c:	print_invalid(current->left);
+./src/display.c:	printf("ls: %s: No such file or directory\n", current->name);
+./src/display.c:	print_invalid(current->right);
+./src/display.c:	print_files(current->left, flags);
+./src/display.c:		printf("%s %2u %s %s ", current->mode, current->links, current->user, current->group);
+./src/display.c:		printf("%s ", current->time);
+./src/display.c:	printf("%s", current->name);
+./src/display.c:	current->linkname ? printf(" -> %s\n", current->linkname) : printf("\n");
+./src/display.c:	print_files(current->right, flags);
+./src/display.c:	print_files_reverse(current->right);
+./src/display.c:	printf("%s\n", current->name);
+./src/display.c:	print_files_reverse(current->left);
+./src/display.c:	print_directories(current->left, 1, flags);
+./src/display.c:	if (print_name || current->left || current->right)
+./src/display.c:		printf("%s:\n", current->name);
+./src/display.c:	if (flags & 1 << l && current->total)
+./src/display.c:		printf("total %lld\n", current->total);
+./src/display.c:	print_files(current->subtree, flags);
+./src/display.c:	print_directories(current->right, 1, flags);
+./src/display.c:	print_recursive(current->left, 1, flags);
+./src/display.c:	// if (current->subtree) instead of the one below?
+./src/display.c:	if (current->type == DIRECTORY)
+./src/display.c:		if (print_name || current->left || current->right)
+./src/display.c:			printf("%s:\n", current->full_path ? current->full_path: current->name);
+./src/display.c:		if (flags & 1 << l && current->total)
+./src/display.c:			printf("total %lld\n", current->total);
+./src/display.c:		print_files(current->subtree, flags);
+./src/display.c:		print_recursive(current->subtree, 1, flags);
+./src/display.c:	print_recursive(current->right, 1, flags);
+./src/display.c:	if (current->device)
+./src/display.c:		printf("\t%6u, ", current->major);
+./src/display.c:		current->minor ? printf("%4u ", current->minor) : printf("%4d ", 0);
+./src/display.c:		printf("%6lli ", current->size);
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IRUSR) ? 'r' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IWUSR) ? 'w' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IXUSR) ? 'x' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IRGRP) ? 'r' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IWGRP) ? 'w' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IXGRP) ? 'x' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IROTH) ? 'r' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IWOTH) ? 'w' : '-';
+./src/long_format.c:    mode[n++] = (buffer.st_mode & S_IXOTH) ? 'x' : '-';
+./src/long_format.c:		(mode[3] == '-') ? (mode[3] = 'S') : (mode[3] = 's');
+./src/long_format.c:		(mode[6] == '-') ? (mode[6] = 'S') : (mode[6] = 's');
+./src/long_format.c:		(mode[9] == '-') ? (mode[9] = 'T') : (mode[9] = 't');
+./src/long_format.c:		mode[0] = '-';
+./src/long_format.c:    if ((time(NULL) - numtime) > 15780000)
+./src/compare.c:	if (n1->numtime == n2->numtime)
+./src/compare.c:		if (n1->nanoseconds < n2->nanoseconds)
+./src/compare.c:		else if (n1->nanoseconds == n2->nanoseconds)
+./src/compare.c:	else if (n1->numtime < n2->numtime)
+./src/compare.c:	str1 = n1->name;
+./src/compare.c:	str2 = n2->name;
+./src/compare.c:	str1 = n1->name;
+./src/compare.c:	str2 = n2->name;
+./src/compare.c:    return (*(unsigned char *)str1 - *(unsigned char *)str2);
+./src/compare.c:	if (n1->numtime == n2->numtime)
+./src/compare.c:		if (n1->nanoseconds > n2->nanoseconds)
+./src/compare.c:		else if (n1->nanoseconds == n2->nanoseconds)
+./src/compare.c:	else if (n1->numtime > n2->numtime)
+./src/compare.c:// return ft_lexcmp * -1?
+./src/compare.c:	str1 = n1->name;
+./src/compare.c:	str2 = n2->name;
+./src/compare.c:    return (*(unsigned char *)str2 - *(unsigned char *)str1);
+./src/flags.c:	while (*(++(*argv)) && ***argv == '-')
+Binary file ./a.out.dSYM/Contents/Resources/DWARF/a.out matches
+./a.out.dSYM/Contents/Info.plist:<?xml version="1.0" encoding="UTF-8"?>
+./a.out.dSYM/Contents/Info.plist:<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+./libft/ft_strcmp.c:	return ((*(unsigned char *)s1 - *(unsigned char *)s2));
+./libft/ft_strlcat.c:	while (i < dstsize - dsize - 1)
+./libft/ft_memmove.c:			*(destination + len - 1) = *(source + len - 1);
+./libft/ft_memmove.c:			len--;
+./libft/ft_strsplit.c:	return (j - i);
+./libft/ft_lstmap.c:			while (current->next)
+./libft/ft_lstmap.c:				current = current->next;
+./libft/ft_lstmap.c:			current->next = result;
+./libft/ft_lstmap.c:		result->next = NULL;
+./libft/ft_lstmap.c:		lst = lst->next;
+./libft/ft_lstadd.c:	new->next = *alst;
+./libft/ft_lstadd_r.c:		while (current->next)
+./libft/ft_lstadd_r.c:			current = current->next;
+./libft/ft_lstadd_r.c:		current->next = new;
+./libft/ft_putnbr.c:	if (n == -2147483648)
+./libft/ft_putnbr.c:		ft_putstr("-2147483648");
+./libft/ft_putnbr.c:			ft_putchar('-');
+./libft/ft_putnbr.c:			n = -n;
+./libft/ft_word_length.c:	return (j - i);
+./libft/Makefile:CFLAGS = -Wall -Wextra -Werror -c
+./libft/Makefile:	@gcc $(CFLAGS) $(SRC) -I.
+./libft/Makefile:	@/bin/rm -f $(OBJ)
+./libft/Makefile:	@/bin/rm -f $(NAME)
+./libft/ft_lstiter.c:		current = current->next;
+./libft/ft_lstdelone.c:		del((*alst)->content, (*alst)->content_size);
+./libft/ft_lstdelone.c:		*alst = (*alst)->next;
+./libft/ft_toupper.c:		return (c - 32);
+./libft/ft_lstnew.c:		node->content = content_copy;
+./libft/ft_lstnew.c:		node->content_size = size_copy;
+./libft/ft_lstnew.c:		node->content = NULL;
+./libft/ft_lstnew.c:		node->content_size = 0;
+./libft/ft_lstnew.c:	node->next = NULL;
+./libft/ft_putnbr_fd.c:	if (n == -2147483648)
+./libft/ft_putnbr_fd.c:		write(fd, "-2147483648", 11);
+./libft/ft_putnbr_fd.c:			write(fd, "-", 1);
+./libft/ft_putnbr_fd.c:			n = -n;
+./libft/ft_strfind.c:	return (-1);
+./libft/ft_itoa.c:	result[--i] = n < 0 ? -(n % 10) + '0' : (n % 10) + '0';
+./libft/ft_itoa.c:		result[--i] = n < 0 ? -(n % 10) + '0' : (n % 10) + '0';
+./libft/ft_itoa.c:		result[--i] = '-';
+./libft/ft_strncmp.c:		n--;
+./libft/ft_strncmp.c:	return ((n == 0) ? 0 : (*(unsigned char *)s1 - *(unsigned char *)s2));
+./libft/ft_memcmp.c:	return ((i == n) ? 0 : (*str1 - *str2));
+./libft/ft_strtrim.c:	while (j > 0 && ft_is(s[j - 1]))
+./libft/ft_strtrim.c:		j--;
+./libft/ft_strtrim.c:		result = ft_snd(s + i, j - i);
+./libft/ft_atoi.c:	else if (str[i] == '-')
+./libft/ft_atoi.c:		sign = -1;
+./libft/ft_atoi.c:		result = (result * 10) + (str[i] - '0');
+./libft/ft_atoi.c:			return ((sign == 1) ? -1 : 0);
+Binary file ./libft/libft.a matches
+./libft/ft_lstdel.c:			*alst = (*alst)->next;
+Binary file ./a.out matches
