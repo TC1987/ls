@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 07:22:33 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 07:53:24 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@
 #include "ls.h"
 #include "libft.h"
 
-char *get_linkname(struct stat buffer, char *full_path)
+char	*get_linkname(struct stat buffer, char *full_path)
 {
-	ssize_t read;
-	char *linkname;
+	char	*linkname;
+	ssize_t	read;
 
 	NULL_CHECK((linkname = (char *)malloc(sizeof(char) * 512)));
 	if ((read = readlink(full_path, linkname, 512)) == -1)
@@ -36,38 +36,41 @@ char *get_linkname(struct stat buffer, char *full_path)
 	return (linkname);
 }
 
-// Need to ft_strdup here or should I do it in the function that calls this function and then pass the name?
-t_node *init_node(struct stat buffer, char *name, char *full_path, int type)
+t_node	*init_node(struct stat buffer, char *name, char *full_path, int type)
 {
-    t_node *node;
+	t_node *node;
 
-    NULL_CHECK((node = (t_node *)malloc(sizeof(t_node))));
+	NULL_CHECK((node = (t_node *)malloc(sizeof(t_node))));
 	node->name = ft_strdup(name);
 	node->full_path = full_path;
 	node->left = NULL;
 	node->right = NULL;
 	node->type = type;
 	if (type == VALID || type == DIRECTORY)
-	{
-		node->subtree = NULL;
-		node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), buffer.st_mtime);
-		node->mode = get_mode(buffer);
-		node->linkname = get_linkname(buffer, full_path);
-		node->group = ft_strdup(getgrgid(buffer.st_gid)->gr_name);
-		node->user = ft_strdup(getpwuid(buffer.st_uid)->pw_name);
-		node->size = buffer.st_size;
-		node->links = buffer.st_nlink;
-		node->total = 0;
-		node->numtime = buffer.st_mtime;
-		node->nanoseconds = buffer.st_mtimespec.tv_nsec;
-		node->device = buffer.st_rdev;
-		node->major = major(buffer.st_rdev);
-		node->minor = minor(buffer.st_rdev);
-	}
+		init_properties(buffer, node, full_path);
 	return (node);
 }
 
-t_trees *init_tree()
+void	init_properties(struct stat buffer, t_node *node, char *full_path)
+{
+	node->subtree = NULL;
+	node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), \
+			buffer.st_mtime);
+	node->mode = get_mode(buffer);
+	node->linkname = get_linkname(buffer, full_path);
+	node->group = ft_strdup(getgrgid(buffer.st_gid)->gr_name);
+	node->user = ft_strdup(getpwuid(buffer.st_uid)->pw_name);
+	node->size = buffer.st_size;
+	node->links = buffer.st_nlink;
+	node->total = 0;
+	node->numtime = buffer.st_mtime;
+	node->nanoseconds = buffer.st_mtimespec.tv_nsec;
+	node->device = buffer.st_rdev;
+	node->major = major(buffer.st_rdev);
+	node->minor = minor(buffer.st_rdev);
+}
+
+t_trees	*init_tree(void)
 {
 	t_trees *tree;
 

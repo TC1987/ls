@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 07:15:58 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 08:54:12 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int		print_files(t_node *current, unsigned char flags)
 	return (1);
 }
 
+/*
 void	print_directories(t_node *current, unsigned char flags, int print_name)
 {
 	if (!current)
@@ -62,6 +63,7 @@ void	print_directories(t_node *current, unsigned char flags, int print_name)
 	print_files(current->subtree, flags);
 	print_directories(current->right, flags, print_name);
 }
+*/
 
 void	print_recursive(t_node *current, unsigned char flags, int print_name)
 {
