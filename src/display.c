@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 08:54:12 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 09:11:05 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,31 +45,13 @@ int		print_files(t_node *current, unsigned char flags)
 	return (1);
 }
 
-/*
-void	print_directories(t_node *current, unsigned char flags, int print_name)
-{
-	if (!current)
-		return ;
-	print_directories(current->left, flags, print_name);
-	if (print_name)
-		printf("\n");
-	if (print_name || current->left || current->right)
-	{
-		printf("%s:\n", current->name);
-		print_name = 1;
-	}
-	if (flags & 1 << l && current->total)
-		printf("total %lld\n", current->total);
-	print_files(current->subtree, flags);
-	print_directories(current->right, flags, print_name);
-}
-*/
+// -R dir2 dir1 is not working.
 
 void	print_recursive(t_node *current, unsigned char flags, int print_name)
 {
 	if (!current)
 		return ;
-	print_recursive(current->left, flags, print_name);
+	print_recursive(current->left, flags, 1);
 	if (current->type == DIRECTORY)
 	{
 		if (print_name)
@@ -83,7 +65,7 @@ void	print_recursive(t_node *current, unsigned char flags, int print_name)
 		if (flags & 1 << l && current->total)
 			printf("total %lld\n", current->total);
 		print_files(current->subtree, flags);
-		print_recursive(current->subtree, flags, print_name);
+		print_recursive(current->subtree, flags, 1);
 	}
 	print_recursive(current->right, flags, print_name);
 }
