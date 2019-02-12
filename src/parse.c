@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 09:19:44 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 09:56:20 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 	int				lstat_value;
 
 	has_dir = 0;
+	// If it can't open, means user does not have permissions to open directory.
 	if (!(dir = opendir(node->full_path)))
 		return ;
 	while ((file = readdir(dir)))
@@ -84,18 +85,18 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 			continue;
 		tmp = create_full_path(node->full_path, file->d_name);
 		lstat_value = lstat(tmp, &buffer);
-		if (lstat_value < 0 && !(flags & 1 << R))
+		if (lstat_value < 0)
 		{
 			current_node = init_node(buffer, file->d_name, tmp, INVALID);
 			add_node(&(node->subtree), current_node, sorting_function);
 		}
-		else if (lstat_value < 0)
-			return ;
 		else
 		{
 			node->total += buffer.st_blocks;
 			current_node = init_node(buffer, file->d_name, tmp, VALID);
+			printf("WTF\n");
 			add_node(&(node->subtree), current_node, sorting_function);
+			printf("2\n");
 			if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
 			{
 				has_dir = 1;

@@ -6,13 +6,14 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 09:11:05 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 09:32:12 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/stat.h>
 #include <stdio.h>
 #include <string.h>
+#include <errno.h>
 #include "ls.h"
 
 void	print_invalid(t_node *current)

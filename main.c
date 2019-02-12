@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 08:57:39 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 09:33:07 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include "ls.h"
 
+// Printing directories where you don't have permission is fucked.
 // Printing -R is fucked. No space between files and directories list.
 // For printing, use function pointers.
 // How to determine if a node is a directory or not for printing? Currently doing node->is_dir = 1 which is ghetto. How else to determine if directory node?
