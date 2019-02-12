@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 21:01:03 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 23:56:51 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ struct	s_node {
 	unsigned int	device;
 	unsigned int	major;
 	unsigned int	minor;
-	int	type;
+	int				type;
+	int				error;
 };
 
 struct	s_trees {
@@ -55,7 +56,7 @@ enum e_bools { FALSE, TRUE };
 int		error(char *message, int code);
 int		update_flag(char f, unsigned char *flags);
 int		check_flags(char ***argv, unsigned char *flags);
-t_node	*init_node(struct stat buffer, char *name, char *full_path, int type);
+t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int error);
 t_trees	*init_tree(void);
 void	init_properties(struct stat buffer, t_node *node, char *full_path);
 void    add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *));
@@ -64,7 +65,7 @@ void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node *, t_node *));
 void	print_invalid(t_node *current);
 int		print_files(t_node *current, unsigned char flags);
-void	print_directories(t_node *current, unsigned char flags, int print_name);
+int		print_directories(t_node *current, unsigned char flags, int print_name, int print_newline);
 void	print_recursive(t_node *current, unsigned char flags, int print_name);
 
 // long_format.c
@@ -81,6 +82,6 @@ int		ft_lexcmp(t_node *n1, t_node *n2);
 int		ft_lexcmp_r(t_node *n1, t_node *n2);
 
 // main.c
-int		(*get_sorting_function(unsigned char flags))(t_node *, t_node *);
+int		(*get_cmp(unsigned char flags))(t_node *, t_node *);
 
 #endif

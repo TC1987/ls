@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 07:53:24 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 22:10:56 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*get_linkname(char *full_path)
 	return (linkname);
 }
 
-t_node	*init_node(struct stat buffer, char *name, char *full_path, int type)
+t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int errno_code)
 {
 	t_node *node;
 
@@ -46,6 +46,7 @@ t_node	*init_node(struct stat buffer, char *name, char *full_path, int type)
 	node->left = NULL;
 	node->right = NULL;
 	node->type = type;
+	node->error = errno_code;
 	if (type == VALID || type == DIRECTORY)
 		init_properties(buffer, node, full_path);
 	return (node);

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:31:33 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 21:00:36 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 22:40:47 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,33 +41,27 @@ void	add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *))
 	}
 }
 
-int     determine_type(struct stat buffer, int lstat_value)
-{
-	if (lstat_value < 0)
-		return errno;
-	else if (S_ISDIR(buffer.st_mode) == 0)
-		return VALID;
-	else
-		return DIRECTORY;
-}
-
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags)
 {
 	struct stat	buffer;
-	int			(*cmp)(t_node *, t_node *);
 	t_node		*node;
-	int             lstat_value;
+	int			(*cmp)(t_node *, t_node *);
 
-	cmp = get_sorting_function(flags);
-	lstat_value = determine_type(buffer, lstat(name, &buffer));
-	node = init_node(buffer, name, name, lstat_value);
-	if (lstat_value == DIRECTORY)
+	cmp = get_cmp(flags);
+	if (lstat(name, &buffer) < 0)
 	{
+		node = init_node(buffer, name, name, INVALID, errno);
+		add_node(&(trees->invalid), node, cmp);
+	}
+	else if (S_ISDIR(buffer.st_mode) == 0)
+	{
+		node = init_node(buffer, name, name, VALID, 0);
+		add_node(&(trees->valid), node, cmp);
+	}
+	else
+	{
+		node = init_node(buffer, name, name, DIRECTORY, 0);
 		add_node(&(trees->directory), node, cmp);
 		parse_dir(node, flags, cmp);
 	}
-	else if (lstat_value == VALID)
-		add_node(&(trees->valid), node, cmp);
-	else
-		add_node(&(trees->invalid), node, cmp);
 }

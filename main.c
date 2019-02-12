@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 09:33:07 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 23:50:16 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int error(char *message, int code)
 	return (code);
 }
 
-int (*get_sorting_function(unsigned char flags))(t_node *, t_node *)
+int (*get_cmp(unsigned char flags))(t_node *, t_node *)
 {
 	if (flags & 1 << r && flags & 1 << t)
 		return (ft_timecmp_r);
@@ -50,8 +50,8 @@ int main(int argc, char *argv[])
 	t_trees *trees;
 	int print_name;
 
-        argc = 0;
-        flags = 0;
+	argc = 0;
+	flags = 0;
 	if (!(trees = init_tree()))
 		return (0);
 	if (!check_flags(&argv, &flags))
@@ -59,6 +59,9 @@ int main(int argc, char *argv[])
 	parse_args(&argv, flags, trees);
 	print_invalid(trees->invalid);
 	print_name = print_files(trees->valid, flags);
-	print_recursive(trees->directory, flags, print_name);
+	if (flags & 1 << R)
+		print_recursive(trees->directory, flags, print_name);
+	else
+		print_directories(trees->directory, flags, print_name, 0);
 	// free();
 }

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 09:32:12 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/12 00:01:37 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,24 @@ int		print_files(t_node *current, unsigned char flags)
 	return (1);
 }
 
-// -R dir2 dir1 is not working.
+int		print_directories(t_node *current, unsigned char flags, int print_name, int print_newline)
+{
+	if (!current)
+		return (print_newline);
+	if (print_name || current->left || current->right)
+		print_name = 1;
+	print_newline = print_directories(current->left, flags, print_name, print_newline);
+	if (print_newline)
+		printf("\n");
+	print_newline = 1;
+	if (print_name || current->left || current->right)
+		printf("%s:\n", current->name);
+	if (flags & 1 << l && current->total)
+		printf("total %lld\n", current->total);
+	print_files(current->subtree, flags);
+	print_newline = print_directories(current->right, flags, print_name, print_newline);
+	return (print_newline);
+}
 
 void	print_recursive(t_node *current, unsigned char flags, int print_name)
 {
@@ -59,13 +76,15 @@ void	print_recursive(t_node *current, unsigned char flags, int print_name)
 			printf("\n");
 		if (print_name || current->left || current->right)
 		{
-			printf("%s:\n", current->full_path ? \
-					current->full_path : current->name);
+			printf("%s:\n", current->full_path ? current->full_path : current->name);
 			print_name = 1;
 		}
 		if (flags & 1 << l && current->total)
 			printf("total %lld\n", current->total);
-		print_files(current->subtree, flags);
+		if (current->error)
+			printf("ls: %s: %s\n", current->name, strerror(current->error));
+		else
+			print_files(current->subtree, flags);
 		print_recursive(current->subtree, flags, 1);
 	}
 	print_recursive(current->right, flags, print_name);
