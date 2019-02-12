@@ -21,7 +21,7 @@
 #include "ls.h"
 #include "libft.h"
 
-char	*get_linkname(struct stat buffer, char *full_path)
+char	*get_linkname(char *full_path)
 {
 	char	*linkname;
 	ssize_t	read;
@@ -57,7 +57,7 @@ void	init_properties(struct stat buffer, t_node *node, char *full_path)
 	node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), \
 			buffer.st_mtime);
 	node->mode = get_mode(buffer);
-	node->linkname = get_linkname(buffer, full_path);
+	node->linkname = get_linkname(full_path);
 	node->group = ft_strdup(getgrgid(buffer.st_gid)->gr_name);
 	node->user = ft_strdup(getpwuid(buffer.st_uid)->pw_name);
 	node->size = buffer.st_size;

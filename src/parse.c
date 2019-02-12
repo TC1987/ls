@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 09:56:20 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 20:58:46 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 
 void parse_args(char ***argv, unsigned char flags, t_trees *trees)
 {
-	struct stat buffer;
-	int lstat_result;
-
 	if (**argv == NULL)
 	{
 		parent_add_node(trees, ".", flags);
@@ -84,6 +81,7 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 		if (!(flags & 1 << a) && file->d_name[0] == '.')
 			continue;
 		tmp = create_full_path(node->full_path, file->d_name);
+		printf("%s\n", tmp);
 		lstat_value = lstat(tmp, &buffer);
 		if (lstat_value < 0)
 		{
@@ -94,9 +92,9 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 		{
 			node->total += buffer.st_blocks;
 			current_node = init_node(buffer, file->d_name, tmp, VALID);
-			printf("WTF\n");
+			printf("%s %s\n", current_node->name, current_node->full_path);
 			add_node(&(node->subtree), current_node, sorting_function);
-			printf("2\n");
+			printf("1\n");
 			if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
 			{
 				has_dir = 1;
@@ -105,7 +103,7 @@ void parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 		}
 	}
 	closedir(dir);
-	
+
 	if (flags & 1 << R && has_dir)
 		parse_subtree(node->subtree, flags, sorting_function);
 }

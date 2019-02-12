@@ -47,11 +47,11 @@ int (*get_sorting_function(unsigned char flags))(t_node *, t_node *)
 int main(int argc, char *argv[])
 {
 	unsigned char flags;
-	int error_code;
 	t_trees *trees;
 	int print_name;
 
-	flags = 0;
+        argc = 0;
+        flags = 0;
 	if (!(trees = init_tree()))
 		return (0);
 	if (!check_flags(&argv, &flags))

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 09:51:14 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/11 21:01:03 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		check_flags(char ***argv, unsigned char *flags);
 t_node	*init_node(struct stat buffer, char *name, char *full_path, int type);
 t_trees	*init_tree(void);
 void	init_properties(struct stat buffer, t_node *node, char *full_path);
-void	add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *));
+void    add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *));
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags);
 void	parse_args(char ***argv, unsigned char flags, t_trees *trees);
 void	parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node *, t_node *));
