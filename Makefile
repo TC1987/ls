@@ -22,7 +22,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(SRC)
 	@echo "$(GREEN)"Compiling Project"$(RESET)"
-	@$(COMPILE_SOFT) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(SANITIZE)
+	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(SANITIZE)
 	@echo "$(GREEN)"Project Successfully Compiled"$(RESET)"
 
 $(LIBFT):
