@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 23:56:51 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/13 02:11:44 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 void	print_invalid(t_node *current);
 int		print_files(t_node *current, unsigned char flags);
 int		print_directories(t_node *current, unsigned char flags, int print_name, int print_newline);
-void	print_recursive(t_node *current, unsigned char flags, int print_name);
+int		print_recursive(t_node *current, unsigned char flags, int print_name, int print_newline);
 
 // long_format.c
 char	*get_mode(struct stat buffer);
