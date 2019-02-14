@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/13 03:32:56 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/14 04:03:46 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <unistd.h>
 #include "ls.h"
 
+// -Rl /Library/Scripts/42/
 // Printing directories where you don't have permission is fucked.
 // Printing -R is fucked. No space between files and directories list.
 // For printing, use function pointers.

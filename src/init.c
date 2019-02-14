@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 22:10:56 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/14 06:11:18 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ char	*get_linkname(char *full_path)
 	return (linkname);
 }
 
+#include <stdio.h>
+#include <errno.h>
+#include <string.h>
+
 t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int errno_code)
 {
 	t_node *node;
@@ -47,20 +51,24 @@ t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int
 	node->right = NULL;
 	node->type = type;
 	node->error = errno_code;
-	if (type == VALID || type == DIRECTORY)
+	if ((type == VALID || type == DIRECTORY) && !errno_code)
 		init_properties(buffer, node, full_path);
 	return (node);
 }
 
 void	init_properties(struct stat buffer, t_node *node, char *full_path)
 {
+	struct passwd *passwd_struct; 
+
 	node->subtree = NULL;
 	node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), \
 			buffer.st_mtime);
 	node->mode = get_mode(buffer);
 	node->linkname = get_linkname(full_path);
 	node->group = ft_strdup(getgrgid(buffer.st_gid)->gr_name);
-	node->user = ft_strdup(getpwuid(buffer.st_uid)->pw_name);
+	passwd_struct = getpwuid(buffer.st_uid);
+	if (passwd_struct)
+		node->user = passwd_struct->pw_name;
 	node->size = buffer.st_size;
 	node->links = buffer.st_nlink;
 	node->total = 0;

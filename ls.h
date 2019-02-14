@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/13 02:11:44 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/14 04:30:16 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ struct	s_trees {
 };
 
 enum e_flags { l, a, r, t, R };
-enum e_type { NONE, VALID, INVALID, DIRECTORY };
+enum e_type { NONE, INVALID, VALID, DIRECTORY };
 enum e_bools { FALSE, TRUE };
 
 int		error(char *message, int code);

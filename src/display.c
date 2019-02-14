@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/13 03:30:10 by tcho             ###   ########.fr       */
+/*   Updated: 2019/02/14 05:17:55 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	print_invalid(t_node *current)
 	if (!current)
 		return ;
 	print_invalid(current->left);
-	printf("ls: %s: %s\n", current->name, strerror(current->type));
+	printf("ls: %s: %s\n", current->name, strerror(current->error));
 	print_invalid(current->right);
 }
 
@@ -30,18 +30,21 @@ int		print_files(t_node *current, unsigned char flags)
 	if (!current)
 		return (0);
 	print_files(current->left, flags);
-	if (flags & 1 << l)
+	if (!current->error)
 	{
-		printf("%s %2u %s %s ", current->mode, \
-				current->links, current->user, current->group);
-		print_major_minor(current);
-		printf("%s ", current->time);
+		if (flags & 1 << l)
+		{
+			printf("%s %2u %s %s ", current->mode, \
+					current->links, current->user, current->group);
+			print_major_minor(current);
+			printf("%s ", current->time);
+		}
+		printf("%s", current->name);
+		if (flags & 1 << l && current->linkname)
+			printf(" -> %s\n", current->linkname);
+		else
+			printf("\n");
 	}
-	printf("%s", current->name);
-	if (flags & 1 << l && current->linkname)
-		printf(" -> %s\n", current->linkname);
-	else
-		printf("\n");
 	print_files(current->right, flags);
 	return (1);
 }
@@ -83,9 +86,9 @@ int		print_recursive(t_node *current, unsigned char flags, int print_name, int p
 		print_newline = 1;
 		if (print_name || current->left || current->right)
 			printf("%s:\n", current->full_path ? current->full_path : current->name);
-		if (flags & 1 << l && current->total)
+		if (flags & 1 << l && current->subtree)
 			printf("total %lld\n", current->total);
-		if (current->error)
+		if (current->error && !(flags & 1 << l) && !(flags & 1 << R))
 			printf("ls: %s: %s\n", current->name, strerror(current->error));
 		else
 			print_files(current->subtree, flags);
