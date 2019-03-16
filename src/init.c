@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/15 23:58:23 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/16 00:04:14 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ char	*get_user(struct stat buffer)
 
 void	init_properties(struct stat buffer, t_node *node, char *full_path)
 {
-
 	node->subtree = NULL;
 	node->time = time_clean(ft_strdup(ctime(&buffer.st_mtime)), buffer.st_mtime);
 	node->mode = get_mode(buffer);
