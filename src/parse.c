@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/15 22:56:17 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/16 00:28:15 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void parse_subtree(t_node *subtree, unsigned char flags, int (*sorting_function)
 	parse_subtree(subtree->right, flags, sorting_function);	
 }
 
-// Only used for directories unless R...
 void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *))
 {
 	DIR				*dir_stream;
@@ -88,9 +87,8 @@ void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *)
 
 		tmp = create_full_path(node->full_path, file->d_name);
 		
-		if (lstat(tmp, &buffer) < 0) // This can never happen since parse_dir only runs for dirs and dir contents.
-			current_node = init_node(buffer, file->d_name, tmp, INVALID, errno);
-		else if (!S_ISDIR(buffer.st_mode))
+		lstat(tmp, &buffer);	
+		if (S_ISDIR(buffer.st_mode) == 0)
 			current_node = init_node(buffer, file->d_name, tmp, VALID, 0);
 		else
 			current_node = init_node(buffer, file->d_name, tmp, DIRECTORY, 0);
