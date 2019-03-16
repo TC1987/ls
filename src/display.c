@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/15 22:53:26 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/16 00:25:53 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int		print_files(t_node *current, unsigned char flags)
 	return (1);
 }
 
-// Need to print out error message.
 int		print_directories(t_node *current, unsigned char flags, int print_name, int print_newline)
 {
 	if (!current)
