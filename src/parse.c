@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/14 05:00:25 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/15 22:56:17 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@
 void parse_args(char ***argv, unsigned char flags, t_trees *trees)
 {
 	if (**argv == NULL)
-	{
 		parent_add_node(trees, ".", flags);
-		return ;
-	}
-	while (**argv)
+	else
 	{
-		parent_add_node(trees, **argv, flags);
-		(*argv)++;
+		while (**argv)
+		{
+			parent_add_node(trees, **argv, flags);
+			(*argv)++;
+		}
 	}
 }
 
@@ -61,6 +61,7 @@ void parse_subtree(t_node *subtree, unsigned char flags, int (*sorting_function)
 	parse_subtree(subtree->right, flags, sorting_function);	
 }
 
+// Only used for directories unless R...
 void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *))
 {
 	DIR				*dir_stream;
@@ -69,7 +70,10 @@ void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *)
 	t_node			*current_node;
 	char			*tmp;
 	int				recurse;
+	t_node 			*tmp_tree;
 
+	recurse = 0;
+	tmp_tree = NULL;
 	if (node->type != DIRECTORY)
 		return ;
 	if (!(dir_stream = opendir(node->full_path)))
@@ -81,19 +85,26 @@ void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *)
 	{
 		if (!(flags & 1 << a) && file->d_name[0] == '.')
 			continue;
+
 		tmp = create_full_path(node->full_path, file->d_name);
-		if (lstat(tmp, &buffer) < 0)
+		
+		if (lstat(tmp, &buffer) < 0) // This can never happen since parse_dir only runs for dirs and dir contents.
 			current_node = init_node(buffer, file->d_name, tmp, INVALID, errno);
-		else if (S_ISDIR(buffer.st_mode) == 0)
+		else if (!S_ISDIR(buffer.st_mode))
 			current_node = init_node(buffer, file->d_name, tmp, VALID, 0);
 		else
 			current_node = init_node(buffer, file->d_name, tmp, DIRECTORY, 0);
-		node->total += buffer.st_blocks;
+
 		add_node(&(node->subtree), current_node, cmp);
-		if ((flags & 1 << R) && S_ISDIR(buffer.st_mode) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
-				recurse = 1;
+		
+		node->total += buffer.st_blocks;
+
+		if ((flags & 1 << R) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
+			recurse = 1;
 	}
+	
 	closedir(dir_stream);
-	if (flags & 1 << R && recurse)
+	
+	if (recurse)
 		parse_subtree(node->subtree, flags, cmp);
 }

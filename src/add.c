@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:31:33 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/14 05:57:24 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/15 22:41:21 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,16 @@ void	add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *))
 	else if (cmp(*root, node) > 0)
 	{
 		if ((*root)->left == NULL)
-		{
 			(*root)->left = node;
-			return ;
-		}
-		add_node(&(*root)->left, node, cmp);
+		else
+			add_node(&(*root)->left, node, cmp);
 	}
 	else
 	{
 		if ((*root)->right == NULL)
-		{
 			(*root)->right = node;
-			return ;
-		}
-		add_node(&(*root)->right, node, cmp);
+		else
+			add_node(&(*root)->right, node, cmp);
 	}
 }
 
