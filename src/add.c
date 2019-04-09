@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:31:33 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/16 00:12:39 by tcho             ###   ########.fr       */
+/*   Updated: 2019/03/16 23:57:48 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ void	parent_add_node(t_trees *trees, char *name, unsigned char flags)
 	int			(*cmp)(t_node *, t_node *);
 
 	cmp = get_cmp(flags);
-	if (lstat(name, &buffer) < 0)
+	if (lstat(name, &buffer) == -1)
 	{
 		node = init_node(buffer, name, name, INVALID, errno);
 		add_node(&(trees->invalid), node, cmp);
 	}
-	else if (S_ISDIR(buffer.st_mode) == 0)
+	else if (!S_ISDIR(buffer.st_mode))
 	{
 		node = init_node(buffer, name, name, VALID, 0);
 		add_node(&(trees->valid), node, cmp);

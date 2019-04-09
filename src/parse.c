@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/16 00:28:15 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/09 08:06:22 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ void parse_args(char ***argv, unsigned char flags, t_trees *trees)
 		}
 	}
 }
-
-#include <stdio.h>
 
 char *create_full_path(char *str1, char *str2)
 {
@@ -84,25 +82,18 @@ void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *)
 	{
 		if (!(flags & 1 << a) && file->d_name[0] == '.')
 			continue;
-
 		tmp = create_full_path(node->full_path, file->d_name);
-		
-		lstat(tmp, &buffer);	
-		if (S_ISDIR(buffer.st_mode) == 0)
+		lstat(tmp, &buffer);
+		if (!S_ISDIR(buffer.st_mode))
 			current_node = init_node(buffer, file->d_name, tmp, VALID, 0);
 		else
 			current_node = init_node(buffer, file->d_name, tmp, DIRECTORY, 0);
-
 		add_node(&(node->subtree), current_node, cmp);
-		
 		node->total += buffer.st_blocks;
-
 		if ((flags & 1 << R) && ft_strcmp(current_node->name, ".") && ft_strcmp(current_node->name, ".."))
 			recurse = 1;
 	}
-	
 	closedir(dir_stream);
-	
 	if (recurse)
 		parse_subtree(node->subtree, flags, cmp);
 }

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/14 04:30:16 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/09 06:53:07 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int		print_recursive(t_node *current, unsigned char flags, int print_name, int p
 char	*get_mode(struct stat buffer);
 char	*get_extra(char *mode, struct stat buffer);
 char	*get_first(char *mode, struct stat buffer);
-char	*time_clean(char *src_time, long numtime);
+char	*time_clean(struct stat buffer);
 void	print_major_minor(t_node *current);
 
 // compare.c

@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/08 17:38:22 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/11 07:52:21 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/09 07:16:44 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,19 +76,20 @@ char	*get_first(char *mode, struct stat buffer)
 	return (mode);
 }
 
-char	*time_clean(char *src_time, long numtime)
+char	*time_clean(struct stat buffer)
 {
 	char *dst_time;
+	char *time_string;
 
-	if (!(dst_time = malloc(sizeof(char) * 13)))
+	time_string = ctime(&buffer.st_mtime);
+	if (!time_string || !(dst_time = ft_strnew(12)))
 		return (NULL);
-	dst_time[12] = '\0';
-	if ((time(NULL) - numtime) > 15780000)
-	{
-		ft_strncpy(dst_time, (src_time + 4), 7);
-		ft_strncpy((dst_time + 7), (src_time + 9), 5);
-	}
+	if ((time(NULL) - buffer.st_mtime) < 15778800)
+		ft_strncat(dst_time, time_string + 4, 12);
 	else
-		ft_strncpy(dst_time, (src_time + 4), 12);
+	{
+		ft_strncat(dst_time, time_string + 4, 7);
+		ft_strncat(dst_time, time_string + 20, 4);
+	}
 	return (dst_time);
 }
