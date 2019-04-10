@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/09 08:06:22 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/09 08:44:12 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,3 +97,4 @@ void parse_dir(t_node *node, unsigned char flags, int (*cmp)(t_node *, t_node *)
 	if (recurse)
 		parse_subtree(node->subtree, flags, cmp);
 }
+

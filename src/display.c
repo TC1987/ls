@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/03/16 00:25:53 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 02:07:33 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,16 @@ int		print_recursive(t_node *current, unsigned char flags, int print_name, int p
 
 void	print_major_minor(t_node *current)
 {
+	printf("\t%6uA, ", current->major);
+	current->minor ? printf("%4uB ", current->minor) : printf("%4dC ", 0);
+
+	/*
 	if (current->device)
 	{
-		printf("\t%6u, ", current->major);
-		current->minor ? printf("%4u ", current->minor) : printf("%4d ", 0);
+		printf("\t%6uA, ", current->major);
+		current->minor ? printf("%4uB ", current->minor) : printf("%4dC ", 0);
 	}
 	else
-		printf("%6lli ", current->size);
+		printf("%6lliD ", current->size);
+	*/
 }
