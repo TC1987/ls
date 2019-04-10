@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/14 04:03:46 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 04:45:08 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@ int error(char *message, int code)
 {
 	printf("%s\n", message);
 	return (code);
-}
-
-int (*get_cmp(unsigned char flags))(t_node *, t_node *)
-{
-	if (flags & 1 << r && flags & 1 << t)
-		return (ft_timecmp_r);
-	else if (flags & 1 << r)
-		return (ft_lexcmp_r);
-	else if (flags & 1 << t)
-		return (ft_timecmp);
-	else
-		return (ft_lexcmp);
 }
 
 int main(int argc, char *argv[])

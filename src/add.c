@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:31:33 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 04:05:02 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 05:10:25 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 #include "ls.h"
 #include "libft.h"
 
-void	add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *))
+void	add_node(t_node **root, t_node *node,
+		int (*cmp)(t_node *, t_node *))
 {
 	if (*root == NULL)
 		*root = node;
@@ -35,6 +36,18 @@ void	add_node(t_node **root, t_node *node, int (*cmp)(t_node *, t_node *))
 		else
 			add_node(&(*root)->right, node, cmp);
 	}
+}
+
+t_func	*get_cmp(unsigned char flags)
+{
+	if (flags & 1 << r && flags & 1 << t)
+		return (ft_timecmp_r);
+	else if (flags & 1 << r)
+		return (ft_lexcmp_r);
+	else if (flags & 1 << t)
+		return (ft_timecmp);
+	else
+		return (ft_lexcmp);
 }
 
 void	parent_add_node(t_trees *trees, char *name, unsigned char flags)
