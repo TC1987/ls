@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/09 06:53:07 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 02:45:35 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	parse_dir(t_node *node, unsigned char flags, int (*sorting_function)(t_node
 void	print_invalid(t_node *current);
 int		print_files(t_node *current, unsigned char flags);
 int		print_directories(t_node *current, unsigned char flags, int print_name, int print_newline);
-int		print_recursive(t_node *current, unsigned char flags, int print_name, int print_newline);
+int		print_recursive(t_node *c, unsigned char flags, int p_name, int p_line);
 
 // long_format.c
 char	*get_mode(struct stat buffer);
@@ -83,5 +83,10 @@ int		ft_lexcmp_r(t_node *n1, t_node *n2);
 
 // main.c
 int		(*get_cmp(unsigned char flags))(t_node *, t_node *);
+
+// get_helpers.c
+char	*get_linkname(char *full_path);
+char	*get_user(struct stat buffer);
+char	*get_group(struct stat buffer);
 
 #endif

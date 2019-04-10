@@ -6,7 +6,8 @@ BASE = main \
 	   src/init \
 	   src/parse \
 	   src/long_format \
-	   src/compare
+	   src/compare \
+	   src/get_helpers
 SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a

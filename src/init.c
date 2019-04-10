@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/09 06:56:57 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 02:44:48 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,6 @@
 #include "ls.h"
 #include "libft.h"
 
-char	*get_linkname(char *full_path)
-{
-	char	*linkname;
-	ssize_t	read;
-
-	NULL_CHECK((linkname = (char *)malloc(sizeof(char) * 512)));
-	if ((read = readlink(full_path, linkname, 512)) == -1)
-	{
-		free(linkname);
-		return (NULL);
-	}
-	linkname[read] = '\0';
-	return (linkname);
-}
-
 t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int errno_code)
 {
 	t_node *node;
@@ -51,31 +36,6 @@ t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int
 	if ((type == VALID || type == DIRECTORY) && !errno_code)
 		init_properties(buffer, node, full_path);
 	return (node);
-}
-
-char	*get_user(struct stat buffer)
-{
-	struct passwd *passwd_struct;
-
-	passwd_struct = getpwuid(buffer.st_uid);
-	if (passwd_struct)
-	{
-		if (passwd_struct->pw_name)
-			return (ft_strdup(passwd_struct->pw_name));
-		if (passwd_struct->pw_uid)
-			return (ft_itoa(passwd_struct->pw_uid));
-	}
-	return (NULL);
-}
-
-char	*get_group(struct stat buffer)
-{
-	struct group *group_struct;
-
-	group_struct = getgrgid(buffer.st_gid);
-	if (group_struct)
-		return (ft_strdup(group_struct->gr_name));
-	return (NULL);
 }
 
 void	init_properties(struct stat buffer, t_node *node, char *full_path)
