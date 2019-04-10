@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 02:44:48 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 03:57:51 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,28 +22,29 @@
 #include "ls.h"
 #include "libft.h"
 
-t_node	*init_node(struct stat buffer, char *name, char *full_path, int type, int errno_code)
+t_node	*init_node(struct stat buffer,
+		char *full_path, int type, int errno_code)
 {
 	t_node *node;
 
 	NULL_CHECK((node = (t_node *)malloc(sizeof(t_node))));
-	node->name = ft_strdup(name);
+	node->name = NULL;
 	node->full_path = full_path;
 	node->left = NULL;
 	node->right = NULL;
 	node->type = type;
 	node->error = errno_code;
 	if ((type == VALID || type == DIRECTORY) && !errno_code)
-		init_properties(buffer, node, full_path);
+		init_properties(buffer, node);
 	return (node);
 }
 
-void	init_properties(struct stat buffer, t_node *node, char *full_path)
+void	init_properties(struct stat buffer, t_node *node)
 {
 	node->subtree = NULL;
 	node->time = time_clean(buffer);
 	node->mode = get_mode(buffer);
-	node->linkname = get_linkname(full_path);
+	node->linkname = get_linkname(node->full_path);
 	node->group = get_group(buffer);
 	node->user = get_user(buffer);
 	node->size = buffer.st_size;
