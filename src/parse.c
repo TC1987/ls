@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 04:34:02 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 05:59:02 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,9 @@ void	init_and_add(t_node *node, char *name, char *full_path,
 	struct stat		buffer;
 	t_node			*current_node;
 
-	lstat(full_path, &buffer);
-	if (!S_ISDIR(buffer.st_mode))
+	if (lstat(full_path, &buffer) == -1)
+		current_node = init_node(buffer, full_path, INVALID, errno);
+	else if (!S_ISDIR(buffer.st_mode))
 		current_node = init_node(buffer, full_path, VALID, 0);
 	else
 		current_node = init_node(buffer, full_path, DIRECTORY, 0);

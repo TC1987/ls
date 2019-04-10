@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 05:32:30 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/10 05:59:09 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int		print_recursive(t_node *c, unsigned char flags, int p_name, int p_line)
 		p_line = 1;
 		if (p_name || c->left || c->right)
 			printf("%s:\n", c->full_path ? c->full_path : c->name);
-		if (flags & 1 << l && c->subtree)
+		if (flags & 1 << l && c->subtree && !c->error)
 			printf("total %lld\n", c->total);
 		if (c->error && !(flags & 1 << l) && !(flags & 1 << R))
 			printf("ls: %s: %s\n", c->name, strerror(c->error));
