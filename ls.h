@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 06:08:33 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 07:50:11 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ struct	s_trees {
 	t_node	*directory;
 };
 
-enum	e_flags { l, a, r, t, R };
+enum	e_flags { l, a, r, t, R, o, d, p };
 enum	e_type { NONE, INVALID, VALID, DIRECTORY };
 enum	e_bools { FALSE, TRUE };
 
@@ -83,5 +83,6 @@ int		ft_lexcmp_r(t_node *n1, t_node *n2);
 char	*get_linkname(char *full_path);
 char	*get_user(struct stat buffer);
 char	*get_group(struct stat buffer);
+void	print_dirnames_only(t_node *current, unsigned char flags);
 
 #endif

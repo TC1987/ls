@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:13:52 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 02:19:12 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 07:49:47 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ int	update_flag(char f, unsigned char *flags)
 		return (*flags |= 1 << t);
 	if (f == 'R')
 		return (*flags |= 1 << R);
+	if (f == 'o')
+		return (*flags |= 1 << o);
+	if (f == 'd')
+		return (*flags |= 1 << d);
+	if (f == 'p')
+		return (*flags |= 1 << p);
 	return (0);
 }
 

@@ -7,7 +7,8 @@ BASE = src/main \
 	   src/parse \
 	   src/long_format \
 	   src/compare \
-	   src/get_helpers
+	   src/get_helpers \
+	   src/bonus
 SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a
@@ -24,7 +25,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(BPRINTF) $(SRC)
 	@echo "$(GREEN)"compiling project"$(RESET)"
-	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(BPRINTF) -L ./b_printf -o $(NAME)
+	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(BPRINTF) -L ./b_printf -o $(NAME) $(SANITIZE) -g
 	@echo "$(GREEN)"project successfully compiled"$(RESET)"
 
 $(LIBFT):
