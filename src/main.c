@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 06:35:57 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:54:49 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,6 @@
 #include <unistd.h>
 #include "ls.h"
 #include "b_printf.h"
-
-// -Rl /Library/Scripts/42/
-// Printing directories where you don't have permission is fucked.
 
 int	error(char *message, int code)
 {
@@ -41,7 +38,11 @@ int	main(int argc, char *argv[])
 	if (!(trees = init_tree()))
 		return (0);
 	if (!check_flags(&argv, &flags))
-		return (error("ls: illegal option\nusage: ls [-lartR] [file ...]", 0));
+	{
+		b_printf("ls: illegal option -- %c\nusage: ls [-lartR] [file ...]\n",
+				**argv);
+		return (0);
+	}
 	parse_args(&argv, flags, trees);
 	print_invalid(trees->invalid);
 	print_name = print_files(trees->valid, flags);

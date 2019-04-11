@@ -14,7 +14,7 @@ LIBFT = ./libft/libft.a
 BPRINTF = ./b_printf/libftprintf.a
 COMPILE = gcc -Wall -Wextra -Werror
 COMPILE_SOFT = gcc
-INCLUDE = -I. -I./libft/ -I./ft_printf -I./b_printf
+INCLUDE = -I. -I./libft/ -I./b_printf
 RED = \x1b[31m
 GREEN = \x1b[32m
 RESET = \x1b[0m
@@ -22,30 +22,30 @@ SANITIZE = -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PRINTF) $(PRINTFF) $(SRC)
-	@echo "$(GREEN)"Compiling Project"$(RESET)"
+$(NAME): $(LIBFT) $(BPRINTF) $(SRC)
+	@echo "$(GREEN)"compiling project"$(RESET)"
 	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(BPRINTF) -L ./b_printf -o $(NAME)
-	@echo "$(GREEN)"Project Successfully Compiled"$(RESET)"
+	@echo "$(GREEN)"project successfully compiled"$(RESET)"
 
 $(LIBFT):
-	@echo "$(GREEN)"Compiling Libft"$(RESET)"
+	@echo "$(GREEN)"compiling libft"$(RESET)"
 	@make -C ./libft
 
 $(BPRINTF):
-	@echo "$(GREEN)"Compiling Printf"$(RESET)"
+	@echo "$(GREEN)"compiling printf"$(RESET)"
 	@make -C ./b_printf
 
 clean:
-	@echo "$(RED)"Cleaning Files"$(RESET)"
+	@echo "$(RED)"cleaning files"$(RESET)"
 	@make clean -C ./libft
-	@make clean -C ./ft_printf
+	@make clean -C ./b_printf
 	@/bin/rm -f $(OBJ)
 
 fclean: clean
-	@echo "$(RED)"Cleaning Library"$(RESET)"
+	@echo "$(RED)"cleaning library"$(RESET)"
 	@make fclean -C ./libft
-	@make fclean -C ./ft_printf
-	@echo "$(RED)"Cleaning Executable"$(RESET)"
+	@make fclean -C ./b_printf
+	@echo "$(RED)"cleaning executable"$(RESET)"
 	@/bin/rm -f $(NAME)
 
 re: fclean all

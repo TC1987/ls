@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 06:35:34 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:55:29 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		print_recursive(t_node *c, unsigned char flags, int p_name, int p_line)
 		if (p_line)
 			b_printf("\n");
 		p_line = 1;
-		if (p_name || c->left || c->right)
+		if (p_name || c->left || c->right || g_print_name)
 			b_printf("%s:\n", c->full_path ? c->full_path : c->name);
 		if (flags & 1 << l && c->subtree && !c->error)
 			b_printf("total %d\n", c->total);
@@ -103,7 +103,6 @@ int		print_recursive(t_node *c, unsigned char flags, int p_name, int p_line)
 	p_line = print_recursive(c->right, flags, p_name, p_line);
 	return (p_line);
 }
-
 
 void	print_major_minor(t_node *current)
 {

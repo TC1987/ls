@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 05:19:36 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:56:23 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	parse_dir(t_node *node, unsigned char flags,
 	t_node			*current_node;
 
 	recurse = 0;
-	if (node->type != DIRECTORY )
+	if (node->type != DIRECTORY)
 		return ;
 	if (!(dir_stream = opendir(node->full_path)))
 	{
@@ -105,12 +105,9 @@ void	parse_dir(t_node *node, unsigned char flags,
 			continue;
 		full_path = create_full_path(node->full_path, file->d_name);
 		current_node = init_and_add(node, file->d_name, full_path, cmp);
-		if ((flags & 1 << R) && !ft_strequ(file->d_name, ".") && !ft_strequ(file->d_name, ".."))
+		if ((flags & 1 << R) && !ft_strequ(file->d_name, ".") &&
+				!ft_strequ(file->d_name, ".."))
 			parse_dir(current_node, flags, cmp);
 	}
 	closedir(dir_stream);
-	/*
-	if (recurse)
-		parse_subtree(node->subtree, flags, cmp);
-	*/
 }
