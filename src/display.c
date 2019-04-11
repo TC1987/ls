@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 05:59:09 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 01:54:48 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,15 @@
 #include <string.h>
 #include <errno.h>
 #include "ls.h"
+#include "ft_printf.h"
+
+int g_print_name = 0;
 
 void	print_invalid(t_node *current)
 {
 	if (!current)
 		return ;
+	g_print_name = 1;
 	print_invalid(current->left);
 	printf("ls: %s: %s\n", current->name, strerror(current->error));
 	print_invalid(current->right);
@@ -32,14 +36,15 @@ int		print_files(t_node *current, unsigned char flags)
 	print_files(current->left, flags);
 	if (!current->error)
 	{
+		g_print_name = 1;
 		if (flags & 1 << l)
 		{
-			printf("%s %2u %s %s ", current->mode, current->links,
+			printf("%s  %u  %s  %s  ", current->mode, current->links,
 					current->user, current->group);
 			print_major_minor(current);
-			printf("%s ", current->time);
+			printf("\t%s ", current->time);
 		}
-		printf("%s", current->name);
+		printf("%s\t", current->name);
 		if (flags & 1 << l && current->linkname)
 			printf(" -> %s\n", current->linkname);
 		else
@@ -61,7 +66,7 @@ int		print_directories(t_node *current, unsigned char flags,
 	if (print_newline)
 		printf("\n");
 	print_newline = 1;
-	if (print_name || current->left || current->right)
+	if (print_name || current->left || current->right || g_print_name)
 		printf("%s:\n", current->name);
 	if (flags & 1 << l && current->total)
 		printf("total %lld\n", current->total);
@@ -104,9 +109,9 @@ void	print_major_minor(t_node *current)
 {
 	if (current->device || current->mode[0] == 'c' || current->mode[0] == 'b')
 	{
-		printf("\t%6u, ", current->major);
-		printf("%4u ", current->minor);
+		printf("%u, ", current->major);
+		printf("%u\t ", current->minor);
 	}
 	else
-		printf("%6lli ", current->size);
+		printf("%lli ", current->size);
 }
