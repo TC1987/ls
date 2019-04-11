@@ -25,7 +25,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(BPRINTF) $(SRC)
 	@echo "$(GREEN)"compiling project"$(RESET)"
-	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(BPRINTF) -L ./b_printf -o $(NAME) $(SANITIZE) -g
+	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(BPRINTF) -L ./b_printf -o $(NAME)
 	@echo "$(GREEN)"project successfully compiled"$(RESET)"
 
 $(LIBFT):
