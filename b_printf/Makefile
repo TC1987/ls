@@ -5,28 +5,34 @@
 #                                                     +:+ +:+         +:+      #
 #    By: tcho <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2019/04/11 00:32:50 by tcho              #+#    #+#              #
-#    Updated: 2019/04/11 01:59:02 by tcho             ###   ########.fr        #
+#    Created: 2018/09/12 19:51:35 by tcho              #+#    #+#              #
+#    Updated: 2019/04/11 05:59:41 by tcho             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CFLAGS = -Wall -Werror -Wextra
-
 NAME = libftprintf.a
-
-SRCS =	ft_printf.c helper.c print_p_s_c.c get_flags.c \
-		print_d_i.c print_o_u_x.c print_f.c ft_atoi.c \
-		ft_isdigit.c ft_strdup.c ft_strjoin.c ft_strlen.c ft_strnew.c
-
-OBJ = ${SRCS:.c=.o}
+BASE = b_printf \
+	   ft_is_space \
+	   ft_ia \
+	   ft_operation \
+	   ft_pc \
+	   ft_ps \
+	   ft_uitoa
+SRC = $(addsuffix .c, $(BASE))
+OBJ = $(addsuffix .o, $(BASE))
+CFLAGS = -Wextra -Werror -Wall -c
 
 all: $(NAME)
-$(NAME):
-	@gcc $(CFLAGS) -c -I. $(SRCS)
-	@ar rcs $(NAME) $(OBJ)
-clean:
-	@/bin/rm -f $(OBJ)
-fclean:clean
-	@/bin/rm -f $(NAME)
-re: fclean all
 
+$(NAME):
+	gcc $(CFLAGS) $(SRC) -I.
+	ar rc $(NAME) $(OBJ)
+	ranlib $(NAME)
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all

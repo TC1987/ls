@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 01:54:48 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:04:28 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <errno.h>
 #include "ls.h"
 #include "ft_printf.h"
+#include "b_printf.h"
 
 int g_print_name = 0;
 
@@ -39,12 +40,12 @@ int		print_files(t_node *current, unsigned char flags)
 		g_print_name = 1;
 		if (flags & 1 << l)
 		{
-			printf("%s  %u  %s  %s  ", current->mode, current->links,
+			b_printf("%s  %u  %s  %s  ", current->mode, current->links,
 					current->user, current->group);
 			print_major_minor(current);
-			printf("\t%s ", current->time);
+			b_printf("\t%s ", current->time);
 		}
-		printf("%s\t", current->name);
+		b_printf("%s\t", current->name);
 		if (flags & 1 << l && current->linkname)
 			printf(" -> %s\n", current->linkname);
 		else
@@ -86,7 +87,7 @@ int		print_recursive(t_node *c, unsigned char flags, int p_name, int p_line)
 	if (p_name || c->left || c->right)
 		p_name = 1;
 	p_line = print_recursive(c->left, flags, p_name, p_line);
-	if (c->type == DIRECTORY)
+	if (c->type == DIRECTORY && c->display)
 	{
 		if (p_line)
 			printf("\n");
@@ -109,9 +110,9 @@ void	print_major_minor(t_node *current)
 {
 	if (current->device || current->mode[0] == 'c' || current->mode[0] == 'b')
 	{
-		printf("%u, ", current->major);
-		printf("%u\t ", current->minor);
+		b_printf("%u, ", current->major);
+		b_printf("%u\t ", current->minor);
 	}
 	else
-		printf("%lli ", current->size);
+		b_printf("%d\t ", current->size);
 }

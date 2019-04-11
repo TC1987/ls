@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 05:10:10 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 05:17:20 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ struct	s_node {
 	unsigned int	minor;
 	int				type;
 	int				error;
+	int				display;
 };
 
 struct	s_trees {

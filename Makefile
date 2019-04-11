@@ -1,5 +1,5 @@
-NAME = ls
-BASE = main \
+NAME = ft_ls
+BASE = src/main \
 	   src/add \
 	   src/display \
 	   src/flags \
@@ -12,9 +12,10 @@ SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a
 PRINTF = ./ft_printf/libftprintf.a
+PRINTFF = ./b_printf/libftprintf.a
 COMPILE = gcc -Wall -Wextra -Werror
 COMPILE_SOFT = gcc
-INCLUDE = -I. -I./libft/ -I./ft_printf
+INCLUDE = -I. -I./libft/ -I./ft_printf -I./b_printf
 RED = \x1b[31m
 GREEN = \x1b[32m
 RESET = \x1b[0m
@@ -22,9 +23,9 @@ SANITIZE = -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(PRINTF) $(SRC)
+$(NAME): $(LIBFT) $(PRINTF) $(PRINTFF) $(SRC)
 	@echo "$(GREEN)"Compiling Project"$(RESET)"
-	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(PRINTF) -L ./ft_printf $(SANITIZE) -g
+	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(PRINTF) -L ./ft_printf $(PRINTFF) -L ./b_printf -o $(NAME)
 	@echo "$(GREEN)"Project Successfully Compiled"$(RESET)"
 
 $(LIBFT):
@@ -35,14 +36,20 @@ $(PRINTF):
 	@echo "$(GREEN)"Compiling Printf"$(RESET)"
 	@make -C ./ft_printf
 
+$(PRINTFF):
+	@echo "$(GREEN)"Compiling Printf"$(RESET)"
+	@make -C ./b_printf
+
 clean:
 	@echo "$(RED)"Cleaning Files"$(RESET)"
 	@make clean -C ./libft
+	@make clean -C ./ft_printf
 	@/bin/rm -f $(OBJ)
 
 fclean: clean
 	@echo "$(RED)"Cleaning Library"$(RESET)"
 	@make fclean -C ./libft
+	@make fclean -C ./ft_printf
 	@echo "$(RED)"Cleaning Executable"$(RESET)"
 	@/bin/rm -f $(NAME)
 

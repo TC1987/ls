@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/02/02 05:07:08 by tcho              #+#    #+#             */
-/*   Updated: 2019/02/02 06:45:47 by tcho             ###   ########.fr       */
+/*   Created: 2018/09/15 15:33:06 by tcho              #+#    #+#             */
+/*   Updated: 2019/04/11 06:01:23 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void print_args(int argc, char ***argv)
-{
-	printf("%s\n", (**argv));
-	(*argv)++;
-	printf("%s\n", (**argv));
-}
+#include "b_printf.h"
 
-int main(int argc, char *argv[])
+int	ft_ia(int num)
 {
-	char ***ptr = &argv;
-	printf("%p\n", ptr);
-	ptr++;
-	printf("%p\n", ptr);
+	int count;
+
+	count = 0;
+	if (num == -2147483648)
+		return (ft_pc("-2147483648"));
+	else
+	{
+		if (num < 0)
+		{
+			ft_pc('-');
+			num = -num;
+			count++;
+		}
+		if (num >= 10)
+			count += ft_ia(num / 10);
+		ft_pc((num % 10) + '0');
+		count++;
+		return (count);
+	}
 }

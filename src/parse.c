@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:30:00 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 05:59:02 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 05:19:36 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,13 @@ void	parse_subtree(t_node *subtree, unsigned char flags,
 	if (!subtree)
 		return ;
 	parse_subtree(subtree->left, flags, sorting_function);
+	if (subtree->full_path[ft_strlen(subtree->full_path) - 1] == '.')
+		return ;
 	parse_dir(subtree, flags, sorting_function);
 	parse_subtree(subtree->right, flags, sorting_function);
 }
 
-void	init_and_add(t_node *node, char *name, char *full_path,
+t_node	*init_and_add(t_node *node, char *name, char *full_path,
 		int (*cmp)(t_node *, t_node *))
 {
 	struct stat		buffer;
@@ -73,8 +75,11 @@ void	init_and_add(t_node *node, char *name, char *full_path,
 	else
 		current_node = init_node(buffer, full_path, DIRECTORY, 0);
 	current_node->name = ft_strdup(name);
+	if (ft_strequ(name, "..") || ft_strequ(name, "."))
+		current_node->display = 0;
 	add_node(&(node->subtree), current_node, cmp);
 	node->total += buffer.st_blocks;
+	return (current_node);
 }
 
 void	parse_dir(t_node *node, unsigned char flags,
@@ -83,9 +88,11 @@ void	parse_dir(t_node *node, unsigned char flags,
 	DIR				*dir_stream;
 	struct dirent	*file;
 	int				recurse;
+	char			*full_path;
+	t_node			*current_node;
 
 	recurse = 0;
-	if (node->type != DIRECTORY)
+	if (node->type != DIRECTORY )
 		return ;
 	if (!(dir_stream = opendir(node->full_path)))
 	{
@@ -96,13 +103,14 @@ void	parse_dir(t_node *node, unsigned char flags,
 	{
 		if (!(flags & 1 << a) && file->d_name[0] == '.')
 			continue;
-		init_and_add(node, file->d_name,
-				create_full_path(node->full_path, file->d_name), cmp);
-		if ((flags & 1 << R) && ft_strcmp(file->d_name, ".") &&
-				ft_strcmp(file->d_name, ".."))
-			recurse = 1;
+		full_path = create_full_path(node->full_path, file->d_name);
+		current_node = init_and_add(node, file->d_name, full_path, cmp);
+		if ((flags & 1 << R) && !ft_strequ(file->d_name, ".") && !ft_strequ(file->d_name, ".."))
+			parse_dir(current_node, flags, cmp);
 	}
 	closedir(dir_stream);
+	/*
 	if (recurse)
 		parse_subtree(node->subtree, flags, cmp);
+	*/
 }

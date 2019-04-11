@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:20:58 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/10 03:57:51 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 05:17:07 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_node	*init_node(struct stat buffer,
 	node->right = NULL;
 	node->type = type;
 	node->error = errno_code;
+	node->display = 1;
 	if ((type == VALID || type == DIRECTORY) && !errno_code)
 		init_properties(buffer, node);
 	return (node);
