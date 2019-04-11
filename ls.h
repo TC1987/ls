@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 01:20:41 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 05:17:20 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:08:33 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,14 @@ struct	s_node {
 	char			*linkname;
 	char			*group;
 	char			*user;
-	long long		size;
-	unsigned short	links;
-	long long		total;
-	long			numtime;
-	long			nanoseconds;
-	unsigned int	device;
-	unsigned int	major;
-	unsigned int	minor;
+	int				size;
+	int				links;
+	int				total;
+	int				numtime;
+	int				nanoseconds;
+	int				device;
+	int				major;
+	int				minor;
 	int				type;
 	int				error;
 	int				display;

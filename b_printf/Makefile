@@ -6,7 +6,7 @@
 #    By: tcho <marvin@42.fr>                        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/09/12 19:51:35 by tcho              #+#    #+#              #
-#    Updated: 2019/04/11 05:59:41 by tcho             ###   ########.fr        #
+#    Updated: 2019/04/11 06:28:43 by tcho             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,15 +24,15 @@ CFLAGS = -Wextra -Werror -Wall -c
 
 all: $(NAME)
 
-$(NAME):
-	gcc $(CFLAGS) $(SRC) -I.
-	ar rc $(NAME) $(OBJ)
-	ranlib $(NAME)
+$(NAME): $(SRC) $(OBJ)
+	@gcc $(CFLAGS) $(SRC) -I.
+	@ar rc $(NAME) $(OBJ)
+	@ranlib $(NAME)
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all

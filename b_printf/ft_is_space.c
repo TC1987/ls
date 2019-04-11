@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 19:23:33 by tcho              #+#    #+#             */
-/*   Updated: 2018/09/16 14:52:29 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:25:56 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_is_space(const char *restrict format, int i)
 {
-	while (format[i] == ' ')
+	while (format[i] && format[i] == ' ')
 		i++;
 	return (i);
 }
