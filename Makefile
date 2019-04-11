@@ -11,9 +11,10 @@ BASE = main \
 SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a
+PRINTF = ./b_printf/libftprintf.a
 COMPILE = gcc -Wall -Wextra -Werror
 COMPILE_SOFT = gcc
-INCLUDE = -I. -I./libft/
+INCLUDE = -I. -I./libft/ -I./b_printf
 RED = \x1b[31m
 GREEN = \x1b[32m
 RESET = \x1b[0m
@@ -21,14 +22,18 @@ SANITIZE = -fsanitize=address
 
 all: $(NAME)
 
-$(NAME): $(LIBFT) $(SRC)
+$(NAME): $(LIBFT) $(PRINTF) $(SRC)
 	@echo "$(GREEN)"Compiling Project"$(RESET)"
-	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(SANITIZE) -g
+	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(PRINTF) -L ./b_printf $(SANITIZE) -g
 	@echo "$(GREEN)"Project Successfully Compiled"$(RESET)"
 
 $(LIBFT):
 	@echo "$(GREEN)"Compiling Libft"$(RESET)"
 	@make -C ./libft
+
+$(PRINTF):
+	@echo "$(GREEN)"Compiling Printf"$(RESET)"
+	@make -C ./b_printf
 
 clean:
 	@echo "$(RED)"Cleaning Files"$(RESET)"
