@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 02:04:16 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:35:57 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include "ls.h"
-#include "ft_printf.h"
+#include "b_printf.h"
 
 // -Rl /Library/Scripts/42/
 // Printing directories where you don't have permission is fucked.
 
 int	error(char *message, int code)
 {
-	ft_printf("%s\n", message);
+	b_printf("%s\n", message);
 	return (code);
 }
 

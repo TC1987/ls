@@ -11,8 +11,7 @@ BASE = src/main \
 SRC = $(addsuffix .c, $(BASE))
 OBJ = $(addsuffix .o, $(BASE))
 LIBFT = ./libft/libft.a
-PRINTF = ./ft_printf/libftprintf.a
-PRINTFF = ./b_printf/libftprintf.a
+BPRINTF = ./b_printf/libftprintf.a
 COMPILE = gcc -Wall -Wextra -Werror
 COMPILE_SOFT = gcc
 INCLUDE = -I. -I./libft/ -I./ft_printf -I./b_printf
@@ -25,18 +24,14 @@ all: $(NAME)
 
 $(NAME): $(LIBFT) $(PRINTF) $(PRINTFF) $(SRC)
 	@echo "$(GREEN)"Compiling Project"$(RESET)"
-	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(PRINTF) -L ./ft_printf $(PRINTFF) -L ./b_printf -o $(NAME)
+	@$(COMPILE) $(SRC) $(INCLUDE) $(LIBFT) -L ./libft $(BPRINTF) -L ./b_printf -o $(NAME)
 	@echo "$(GREEN)"Project Successfully Compiled"$(RESET)"
 
 $(LIBFT):
 	@echo "$(GREEN)"Compiling Libft"$(RESET)"
 	@make -C ./libft
 
-$(PRINTF):
-	@echo "$(GREEN)"Compiling Printf"$(RESET)"
-	@make -C ./ft_printf
-
-$(PRINTFF):
+$(BPRINTF):
 	@echo "$(GREEN)"Compiling Printf"$(RESET)"
 	@make -C ./b_printf
 

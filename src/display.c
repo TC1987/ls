@@ -6,16 +6,14 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 06:31:07 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 06:35:34 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/stat.h>
-#include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include "ls.h"
-#include "ft_printf.h"
 #include "b_printf.h"
 
 int g_print_name = 0;
