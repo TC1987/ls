@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 08:16:18 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/12 00:42:52 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,18 @@ int		print_files(t_node *current, unsigned char flags)
 		g_print_name = 1;
 		if (flags & 1 << l)
 		{
-			b_printf("%s  %u  %s  ", current->mode, current->links,
+			b_printf("%s  %u %s\t", current->mode, current->links,
 					current->user);
 			if (!(flags & 1 << o))
-				b_printf("%s  ", current->group);
+				b_printf("%s\t", current->group);
 			print_major_minor(current);
-			b_printf("\t%s ", current->time);
+			b_printf("%s ", current->time);
 		}
 		(flags & 1 << p && current->type == DIRECTORY) ?
 			b_printf("%s/", current->name) : b_printf("%s", current->name);
 		if (flags & 1 << l && current->linkname)
-			b_printf(" -> %s\n", current->linkname);
-		else
-			b_printf("\n");
+			b_printf(" -> %s", current->linkname);
+		b_printf("\n");
 	}
 	print_files(current->right, flags);
 	return (1);
@@ -110,10 +109,7 @@ int		print_recursive(t_node *c, unsigned char flags, int p_name, int p_line)
 void	print_major_minor(t_node *current)
 {
 	if (current->device || current->mode[0] == 'c' || current->mode[0] == 'b')
-	{
-		b_printf("%u, ", current->major);
-		b_printf("%u\t ", current->minor);
-	}
+		b_printf("%u,\t%u\t", current->major, current->minor);
 	else
-		b_printf("%d\t ", current->size);
+		b_printf("%d\t", current->size);
 }
