@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/06 19:25:57 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/12 00:42:52 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/12 00:51:29 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int		print_directories(t_node *current, unsigned char flags,
 	print_newline = 1;
 	if (print_name || current->left || current->right || g_print_name)
 		b_printf("%s:\n", current->name);
-	if (flags & 1 << l && current->total)
+	if (flags & 1 << l)
 		b_printf("total %d\n", current->total);
 	if (current->error)
 		b_printf("ls: %s: %s\n", current->name, strerror(current->error));
