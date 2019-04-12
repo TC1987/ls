@@ -6,7 +6,7 @@
 /*   By: tcho <marvin@42.fr>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/02 04:08:26 by tcho              #+#    #+#             */
-/*   Updated: 2019/04/11 10:11:59 by tcho             ###   ########.fr       */
+/*   Updated: 2019/04/11 22:55:44 by tcho             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	main(int argc, char *argv[])
 		return (0);
 	if (!check_flags(&argv, &flags))
 	{
-		b_printf("ls: illegal option -- %c\nusage: ls [-lartR] [file ...]\n",
+		b_printf("ls: illegal option -- %c\nusage: ls [-lartRodp] [file ...]\n",
 				**argv);
 		return (0);
 	}
